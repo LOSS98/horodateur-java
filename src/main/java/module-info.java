@@ -10,7 +10,11 @@ module fr.insa.horodateurjava {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires jakarta.persistence;
+    requires java.naming;
 
+    opens fr.insa.horodateurjava.database.models to javafx.base;
     opens fr.insa.horodateurjava to javafx.fxml;
+
     exports fr.insa.horodateurjava;
 }
