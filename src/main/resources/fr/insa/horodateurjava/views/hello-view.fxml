@@ -12,14 +12,15 @@
     </padding>
 
     <!-- TableView pour afficher les places -->
-    <TableView fx:id="tableView">
+    <TableView fx:id="tableView" prefWidth="600" prefHeight="400">
         <columns>
             <TableColumn fx:id="colNumero" text="Numéro" />
-            <TableColumn fx:id="colDisponibilite" text="Disponibilité" />
-            <TableColumn fx:id="colEnTravaux" text="En travaux" />
             <TableColumn fx:id="colEtage" text="Étage" />
-            <TableColumn fx:id="colTarifHoraire" text="Tarif horaire" />
+            <TableColumn fx:id="colType" text="Type" />
+            <TableColumn fx:id="colParking" text="Parking" />
+            <TableColumn fx:id="colDisponibilite" text="Disponible" />
+            <TableColumn fx:id="colTarifHoraire" text="Tarif Horaire" />
+            <TableColumn fx:id="colEnTravaux" text="En Travaux" />
         </columns>
     </TableView>
-
 </VBox>

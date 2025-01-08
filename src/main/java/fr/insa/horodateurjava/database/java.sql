@@ -1,12 +1,15 @@
 -- Table Place
 CREATE TABLE Place (
-                       numero INTEGER PRIMARY KEY,         -- Identifiant unique de la place
+                       numero INTEGER NOT NULL ,         -- Identifiant unique de la place
                        etage INTEGER NOT NULL,             -- Étage de la place
+                       idParking INTEGER NOT NULL,             -- Étage de la place
                        type VARCHAR(50) NOT NULL,             -- Type de la place
                        disponibilite BOOLEAN NOT NULL, -- Disponibilité (true = libre)
                        tarifHoraire FLOAT NOT NULL,    -- Tarif horaire
                        puissanceCharge FLOAT,   -- Puissance de charge en kW
                        enTravaux BOOLEAN NOT NULL      -- Place en travaux ou non
+                       PRIMARY KEY (idParking, numero)
+                       FOREIGN KEY (idParking) REFERENCES Parking(idParking)
 );
 
 -- Table pour les réservations
@@ -14,9 +17,11 @@ CREATE TABLE Reservation (
                              numeroReservation INTEGER PRIMARY KEY,
                              immatriculation VARCHAR(50) NOT NULL, -- Numéro d'immatriculation du véhicule
                              numeroPlace INTEGER NOT NULL,             -- Clé étrangère vers Place
+                             idParking INTEGER NOT NULL
                              dateHeureDebut DATETIME NOT NULL,
                              dateHeureFin DATETIME NOT NULL,
-                             FOREIGN KEY (numeroPlace) REFERENCES Place(numero)
+                             FOREIGN KEY (numeroPlace) REFERENCES Place(numero),
+                             FOREIGN KEY (idParking) REFERENCES Place(idParking)
 );
 
 -- Table pour les administrateurs

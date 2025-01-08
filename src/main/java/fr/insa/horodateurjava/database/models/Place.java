@@ -2,6 +2,8 @@ package fr.insa.horodateurjava.database.models;
 
 public abstract class Place {
     private int numero;
+    private int idParking;
+    private String type;
     private boolean disponibilite;
     private boolean enTravaux;
     private int etage;
@@ -39,6 +41,24 @@ public abstract class Place {
     public void setEtage(int etage) {
         this.etage = etage;
     }
+
+    public void setParking(int idParking) {
+        this.idParking = idParking;
+    }
+
+    public int getIdParking() {
+        return idParking;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+//
+//    public String getType() {
+//        return type;
+//    }
+
+
 
     public double getTarifHoraire() {
         return tarifHoraire;

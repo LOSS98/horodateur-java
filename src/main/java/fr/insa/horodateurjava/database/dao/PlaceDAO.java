@@ -76,6 +76,8 @@ public class PlaceDAO {
         place.setEnTravaux(resultSet.getBoolean("enTravaux"));
         place.setEtage(resultSet.getInt("etage"));
         place.setTarifHoraire(resultSet.getDouble("tarifHoraire"));
+        place.setParking(resultSet.getInt("idParking"));
+        place.setType(resultSet.getString("type"));
 
         return place;
     }

@@ -32,6 +32,12 @@ public class HelloController {
     @FXML
     private TableColumn<Place, Double> colTarifHoraire;
 
+    @FXML
+    private TableColumn<Place, Integer> colParking;
+
+    @FXML
+    private TableColumn<Place, String> colType;
+
     private ObservableList<Place> places;
 
     public void initialize() {
@@ -47,6 +53,8 @@ public class HelloController {
             colEnTravaux.setCellValueFactory(new PropertyValueFactory<>("enTravaux"));
             colEtage.setCellValueFactory(new PropertyValueFactory<>("etage"));
             colTarifHoraire.setCellValueFactory(new PropertyValueFactory<>("tarifHoraire"));
+            colParking.setCellValueFactory(new PropertyValueFactory<>("idParking"));
+            colType.setCellValueFactory(new PropertyValueFactory<>("type"));
 
             // Ajouter les données à la table
             tableView.setItems(places);
