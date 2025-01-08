@@ -1,22 +1,20 @@
--- Table Place
 CREATE TABLE Place (
-                       numero INTEGER NOT NULL ,         -- Identifiant unique de la place
-                       etage INTEGER NOT NULL,             -- Étage de la place
-                       idParking INTEGER NOT NULL,             -- Étage de la place
-                       type VARCHAR(50) NOT NULL,             -- Type de la place
-                       disponibilite BOOLEAN NOT NULL, -- Disponibilité (true = libre)
-                       tarifHoraire FLOAT NOT NULL,    -- Tarif horaire
-                       puissanceCharge FLOAT,   -- Puissance de charge en kW
-                       enTravaux BOOLEAN NOT NULL      -- Place en travaux ou non
+                       numero INTEGER NOT NULL ,
+                       etage INTEGER NOT NULL,
+                       idParking INTEGER NOT NULL,
+                       type VARCHAR(50) NOT NULL,
+                       disponibilite BOOLEAN NOT NULL,
+                       tarifHoraire FLOAT NOT NULL,
+                       puissanceCharge FLOAT,
+                       enTravaux BOOLEAN NOT NULL
                        PRIMARY KEY (idParking, numero)
                        FOREIGN KEY (idParking) REFERENCES Parking(idParking)
 );
 
--- Table pour les réservations
 CREATE TABLE Reservation (
                              numeroReservation INTEGER PRIMARY KEY,
-                             immatriculation VARCHAR(50) NOT NULL, -- Numéro d'immatriculation du véhicule
-                             numeroPlace INTEGER NOT NULL,             -- Clé étrangère vers Place
+                             immatriculation VARCHAR(50) NOT NULL,
+                             numeroPlace INTEGER NOT NULL,
                              idParking INTEGER NOT NULL
                              dateHeureDebut DATETIME NOT NULL,
                              dateHeureFin DATETIME NOT NULL,
@@ -24,40 +22,37 @@ CREATE TABLE Reservation (
                              FOREIGN KEY (idParking) REFERENCES Place(idParking)
 );
 
--- Table pour les administrateurs
 CREATE TABLE Administrateur (
                                 idAdmin INTEGER PRIMARY KEY AUTOINCREMENT,
                                 nom VARCHAR(100) NOT NULL,
                                 prenom VARCHAR(100) NOT NULL,
                                 email VARCHAR(255) UNIQUE NOT NULL,
-                                motDePasse VARCHAR(255) NOT NULL -- Stocké de manière sécurisée (hash)
+                                motDePasse VARCHAR(255) NOT NULL
 );
 
--- Table pour les rapports
 CREATE TABLE Rapport (
                          idRapport INTEGER PRIMARY KEY AUTOINCREMENT,
                          tauxOccupation FLOAT NOT NULL,
-                         heuresDePointe JSON, -- Ou format adapté pour stocker plusieurs dates
+                         heuresDePointe JSON,
                          dateGeneration DATETIME NOT NULL,
-                         idAdmin INTEGER NOT NULL, -- Clé étrangère vers Administrateur
+                         idAdmin INTEGER NOT NULL,
                          FOREIGN KEY (idAdmin) REFERENCES Administrateur(idAdmin)
 );
 
--- Informations générales sur le parking
 CREATE TABLE Parking (
                          idParking INTEGER PRIMARY KEY AUTOINCREMENT,
                          nomDuParking VARCHAR(100) NOT NULL,
                          adresseDuParking VARCHAR(255) NOT NULL,
-                         nombrePlacesDisponibles INTEGER NOT NULL -- Mise à jour dynamique
+                         nombrePlaces INTEGER NOT NULL
 );
 
 CREATE TABLE HistoriqueReservation (
-                                       idHistorique INTEGER PRIMARY KEY AUTOINCREMENT,   -- Clé primaire unique pour chaque entrée dans l'historique
-                                       numeroReservation INTEGER NOT NULL,                  -- Clé étrangère vers la table `RESERVATION`
-                                       immatriculation VARCHAR(50) NOT NULL,             -- Numéro d'immatriculation du véhicule
-                                       numeroPlace INTEGER NOT NULL,                        -- Clé étrangère vers la table `PLACE`
-                                       dateHeureDebut DATETIME NOT NULL,                 -- Date et heure de début de la réservation
-                                       dateHeureFin DATETIME NOT NULL,                   -- Date et heure de fin de la réservation
-                                       FOREIGN KEY (numeroReservation) REFERENCES RESERVATION(numeroReservation),  -- Référence la table `RESERVATION`
-                                       FOREIGN KEY (numeroPlace) REFERENCES PLACE(numero)  -- Référence la table `PLACE`
+                                       idHistorique INTEGER PRIMARY KEY AUTOINCREMENT,
+                                       numeroReservation INTEGER NOT NULL,
+                                       immatriculation VARCHAR(50) NOT NULL,
+                                       numeroPlace INTEGER NOT NULL,
+                                       dateHeureDebut DATETIME NOT NULL,
+                                       dateHeureFin DATETIME NOT NULL,
+                                       FOREIGN KEY (numeroReservation) REFERENCES RESERVATION(numeroReservation),
+                                       FOREIGN KEY (numeroPlace) REFERENCES PLACE(numero)
 );
