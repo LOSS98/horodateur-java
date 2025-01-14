@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: DBE4EE;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <AnchorPane prefHeight="150.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3e7cb1" height="75.0" layoutY="75.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1001.0" />
+            <Text fill="WHITE" layoutX="377.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Réservation de places de parking">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Button layoutX="830.0" layoutY="20.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: F17300;" text="Accès administrateur" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </top>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text fill="#054a91" layoutX="355.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sélectionnez le type de place souhaité :">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Button layoutX="48.0" layoutY="130.0" mnemonicParsing="false" prefWidth="250.0" style="-fx-background-color: #81A4CD;" text="Classique" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button layoutX="378.0" layoutY="130.0" mnemonicParsing="false" prefWidth="250.0" style="-fx-background-color: #81A4CD;" text="Handicapée" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button layoutX="708.0" layoutY="130.0" mnemonicParsing="false" prefWidth="250.0" style="-fx-background-color: #81A4CD;" text="Recharge électrique" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button layoutX="213.0" layoutY="235.0" mnemonicParsing="false" prefWidth="250.0" style="-fx-background-color: #81A4CD;" text="Famille" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button layoutX="543.0" layoutY="235.0" mnemonicParsing="false" prefWidth="250.0" style="-fx-background-color: #81A4CD;" text="Deux roues" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

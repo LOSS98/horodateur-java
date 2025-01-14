@@ -63,6 +63,11 @@ public class HelloController {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    void goToHomePage(MouseEvent event) {
+        home_page
+    }
 }
 
 

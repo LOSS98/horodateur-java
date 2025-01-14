@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: DBE4EE;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <top>
+        <AnchorPane prefHeight="150.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+            <children>
+                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3e7cb1" height="75.0" layoutY="75.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1001.0" />
+                <Text fill="WHITE" layoutX="377.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Réservation de places de parking">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Text>
+            <Hyperlink layoutX="15.0" layoutY="100.0" text="&lt; Retour" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Hyperlink>
+            </children>
+        </AnchorPane>
+    </top>
+    <center>
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button layoutX="721.0" layoutY="349.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #054A91;" text="Valider" textFill="WHITE">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Button>
+            <Text fill="#054a91" layoutX="233.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Entrez l'immatriculation de votre véhicule :">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text fill="#054a91" layoutX="258.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date et heure de fin de la réservation :">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text fill="#054a91" layoutX="261.0" layoutY="293.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sélectionnez un étage de préférence :">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <ChoiceBox layoutX="528.0" layoutY="277.0" prefWidth="200.0" />
+            <ChoiceBox layoutX="528.0" layoutY="90.0" prefWidth="200.0" />
+            <DateTimePicker layoutX="578.0" layoutY="171.0" />
+            </children>
+        </AnchorPane>
+    </center>
+</BorderPane>
