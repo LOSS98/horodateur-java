@@ -12,6 +12,7 @@ module fr.insa.horodateurjava {
     requires com.almasb.fxgl.all;
     requires jakarta.persistence;
     requires java.naming;
+    requires org.slf4j;
 
     opens fr.insa.horodateurjava.database.models to javafx.base;
     opens fr.insa.horodateurjava to javafx.fxml;
