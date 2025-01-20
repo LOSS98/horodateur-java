@@ -13,9 +13,14 @@ module fr.insa.horodateurjava {
     requires jakarta.persistence;
     requires java.naming;
     requires org.slf4j;
+    requires com.fasterxml.jackson.core;
+    requires jBCrypt;
+    requires itextpdf;
 
-    opens fr.insa.horodateurjava.database.models to javafx.base;
+    opens fr.insa.horodateurjava.models to javafx.base;
     opens fr.insa.horodateurjava to javafx.fxml;
 
     exports fr.insa.horodateurjava;
+    exports fr.insa.horodateurjava.adminControllers;
+    opens fr.insa.horodateurjava.adminControllers to javafx.fxml;
 }

@@ -1,12 +1,11 @@
 package fr.insa.horodateurjava;
 
 import fr.insa.horodateurjava.database.dao.PlaceDAO;
-import fr.insa.horodateurjava.database.models.Place;
-import fr.insa.horodateurjava.database.models.Reservation;
+import fr.insa.horodateurjava.models.Place;
+import fr.insa.horodateurjava.models.Reservation;
 import fr.insa.horodateurjava.utils.DatabaseHandler;
 import fr.insa.horodateurjava.utils.NavigationHelper;
 import javafx.fxml.FXML;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.DatePicker;
@@ -17,6 +16,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.event.ActionEvent;
 
 import java.sql.Connection;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -47,6 +47,7 @@ public class ReservationController {
     @FXML
     private void onReservePlace() {
         try {
+            LocalDateTime now = LocalDateTime.now();
             String immatriculation = licensePlateField.getText();
             String preferredFloorStr = preferredFloorField.getText();
 
@@ -62,14 +63,17 @@ public class ReservationController {
             }
 
 
+
             LocalDateTime endDateTime;
             LocalTime endTime;
 
-            String timeString = endHourField.getText() + ":" + endMinuteField.getText();
+            String timeString = endHourField.getText() + ":" + endMinuteField.getText() + ":00";
+
+
 
 
             try {
-                endTime = LocalTime.parse(timeString, DateTimeFormatter.ofPattern("HH:mm"));
+                endTime = LocalTime.parse(timeString, DateTimeFormatter.ofPattern("HH:mm:ss"));
             } catch (Exception e) {
                 messageLabel.setText("Erreur : format de l'heure incorrect.");
                 return;
@@ -77,12 +81,21 @@ public class ReservationController {
 
             endDateTime = LocalDateTime.of(endDatePicker.getValue(), endTime);
 
+            if (endDateTime.isBefore(now)) {
+                messageLabel.setText("Erreur : la date et l'heure de fin doivent être ultérieures à maintenant.");
+                return;
+            }
+
             try (Connection connection = DatabaseHandler.getConnection()) {
                 PlaceDAO placeDAO = new PlaceDAO(connection);
 
                 Place availablePlace = placeDAO.findAvailablePlace(vehicleType, parkingName, preferredFloorStr);
                 if (availablePlace != null) {
-                    Reservation reservation = new Reservation(0, immatriculation, availablePlace.getNumero(), LocalDateTime.now(), endDateTime);
+                    Duration duration = Duration.between(now, endDateTime);
+                    long totalHours = duration.toHours();
+
+                    double totalPrice = totalHours * availablePlace.getTarifHoraire();
+                    Reservation reservation = new Reservation(0, immatriculation, availablePlace.getNumero(), now, endDateTime, totalPrice);
                     placeDAO.reservePlace(availablePlace, reservation);
 
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/insa/horodateurjava/views/confirmation-view.fxml"));
@@ -90,7 +103,10 @@ public class ReservationController {
                     BorderPane confirmationView = loader.load();
 
                     ConfirmationController confirmationController = loader.getController();
-                    confirmationController.initialize(vehicleType, immatriculation, availablePlace.getNumero(), availablePlace.getEtage(), parkingName, LocalDateTime.now(), endDateTime, availablePlace.getTarifHoraire());
+
+
+
+                    confirmationController.initialize(vehicleType, immatriculation, availablePlace.getNumero(), availablePlace.getEtage(), parkingName, now, endDateTime, totalPrice);
 
                     Stage stage = (Stage) messageLabel.getScene().getWindow();
                     Scene scene = new Scene(confirmationView);

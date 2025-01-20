@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600" prefWidth="1000" style="-fx-background-color: DBE4EE;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.insa.horodateurjava.adminControllers.PlaceController">
+    <top>
+        <AnchorPane prefHeight="150" prefWidth="800" BorderPane.alignment="CENTER">
+            <children>
+                <Rectangle arcHeight="5" arcWidth="5" fill="#3e7cb1" height="75" layoutY="75" stroke="BLACK" strokeType="INSIDE" strokeWidth="0" width="1001" />
+                <Text fill="WHITE" layoutX="438.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0" text="Gérer une place" textAlignment="CENTER">
+                    <font>
+                        <Font size="18" />
+                    </font>
+                </Text>
+                <Hyperlink fx:id="backLink" layoutX="15" layoutY="100" onAction="#handleBackLinkAction" text="&lt; Retour" textFill="WHITE">
+                    <font>
+                        <Font size="14" />
+                    </font>
+                </Hyperlink>
+
+            </children>
+        </AnchorPane>
+    </top>
+    <center>
+        <AnchorPane prefHeight="400" prefWidth="800" BorderPane.alignment="CENTER">
+            <children>
+                <Text fill="#054a91" layoutX="394.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0" text="Numéro :">
+                    <font>
+                        <Font size="14" />
+                    </font>
+                </Text>
+
+                <Text fill="#054a91" layoutX="410.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0" text="Étage :">
+                    <font>
+                        <Font size="14" />
+                    </font>
+                </Text>
+
+                <Text fill="#054a91" layoutX="317.0" layoutY="302.0" strokeType="OUTSIDE" strokeWidth="0" text="En traveaux :" textAlignment="RIGHT" wrappingWidth="138.1826171875">
+                    <font>
+                        <Font size="14" />
+                    </font>
+                </Text>
+                <HBox layoutX="528" layoutY="202" spacing="10" />
+
+                <Button layoutX="721.0" layoutY="357.0" mnemonicParsing="false" onAction="#handleAddPlace" prefHeight="30" prefWidth="100" style="-fx-background-color: #054A91;" text="Ajouter" textFill="WHITE">
+                    <font>
+                        <Font size="14" />
+                    </font>
+                </Button>
+
+                <Label fx:id="messageLabel" layoutX="375" layoutY="400" style="-fx-text-fill: red;" text="" />
+            <Text fill="#054a91" layoutX="414.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0" text="Type :">
+               <font>
+                  <Font size="14" />
+               </font>
+            </Text>
+            <Text fill="#054a91" layoutX="363.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0" text="Tarif Horraire :">
+               <font>
+                  <Font size="14" />
+               </font>
+            </Text>
+            <Text fill="#054a91" layoutX="321.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0" text="Puissance de charge :">
+               <font>
+                  <Font size="14" />
+               </font>
+            </Text>
+            <Text fill="#054a91" layoutX="398.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0" text="Parking :">
+               <font>
+                  <Font size="14" />
+               </font>
+            </Text>
+            <TextField fx:id="numeroField" layoutX="468.0" layoutY="94.0" prefWidth="50" style="-fx-background-color: #81A4CD; -fx-text-fill: WHITE; -fx-font-size: 14px;" />
+            <TextField fx:id="etageField" layoutX="468.0" layoutY="132.0" prefWidth="50" style="-fx-background-color: #81A4CD; -fx-text-fill: WHITE; -fx-font-size: 14px;" />
+            <TextField fx:id="tarifHoraireField" layoutX="467.0" layoutY="204.0" prefWidth="50" style="-fx-background-color: #81A4CD; -fx-text-fill: WHITE; -fx-font-size: 14px;" />
+            <Text fill="#054a91" layoutX="524.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0" text="€">
+               <font>
+                  <Font size="14" />
+               </font>
+            </Text>
+            <TextField fx:id="puissanceChargeField" layoutX="467.0" layoutY="244.0" prefWidth="50" style="-fx-background-color: #81A4CD; -fx-text-fill: WHITE; -fx-font-size: 14px;" />
+            <Text fill="#054a91" layoutX="524.0" layoutY="263.0" strokeType="OUTSIDE" strokeWidth="0" text="KWh">
+               <font>
+                  <Font size="14" />
+               </font>
+            </Text>
+            <ComboBox fx:id="enTravauxComboBox" layoutX="466.0" layoutY="283.0" prefWidth="150.0" style="-fx-background-color: #81A4CD; -fx-text-fill: WHITE; -fx-font-size: 14px;" />
+            <ComboBox fx:id="typeComboBox" layoutX="467.0" layoutY="168.0" prefWidth="150.0" style="-fx-background-color: #81A4CD; -fx-text-fill: WHITE; -fx-font-size: 14px;" />
+            <ComboBox fx:id="parkingComboBox" layoutX="467.0" layoutY="56.0" prefWidth="150.0" style="-fx-background-color: #81A4CD; -fx-text-fill: WHITE; -fx-font-size: 14px;" />
+            <Button layoutX="616.0" layoutY="357.0" mnemonicParsing="false" onAction="#handleUpdatePlace" prefHeight="30" prefWidth="100" style="-fx-background-color: #054A91;" text="Modifier" textFill="WHITE">
+               <font>
+                  <Font size="14" />
+               </font>
+            </Button>
+            <Button layoutX="204.0" layoutY="357.0" mnemonicParsing="false" onAction="#handleDeletePlace" prefHeight="30" prefWidth="100" style="-fx-background-color: #054A91;" text="Supprimer" textFill="WHITE">
+               <font>
+                  <Font size="14" />
+               </font>
+            </Button>
+            </children>
+        </AnchorPane>
+    </center>
+</BorderPane>

@@ -1,4 +1,4 @@
-package fr.insa.horodateurjava.database.models;
+package fr.insa.horodateurjava.models;
 
 public class Administrateur {
     private int idAdmin;
@@ -7,7 +7,6 @@ public class Administrateur {
     private String email;
     private String motDePasse;
 
-    // Constructeur
     public Administrateur(int idAdmin, String nom, String prenom, String email, String motDePasse) {
         this.idAdmin = idAdmin;
         this.nom = nom;
@@ -15,8 +14,20 @@ public class Administrateur {
         this.email = email;
         this.motDePasse = motDePasse;
     }
+    public Administrateur(int idAdmin, String nom, String prenom, String email) {
+        this.idAdmin = idAdmin;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+    }
+    public Administrateur(String nom, String prenom, String email, String motDePasse) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.motDePasse = motDePasse;
+    }
 
-    // Getters et Setters
+    // Getters and Setters
     public int getIdAdmin() {
         return idAdmin;
     }

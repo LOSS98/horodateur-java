@@ -22,7 +22,7 @@
                         <Font size="18" />
                     </font>
                 </Text>
-                <Button layoutX="830" layoutY="20" mnemonicParsing="false" prefHeight="35" prefWidth="150" style="-fx-background-color: F17300;" text="Accès administrateur" textAlignment="CENTER" textFill="WHITE">
+                <Button layoutX="830" layoutY="20" mnemonicParsing="false" prefHeight="35" prefWidth="150" style="-fx-background-color: F17300;" text="Accès administrateur" textAlignment="CENTER" textFill="WHITE" onAction="#onAdminAccess">
                     <font>
                         <Font size="14" />
                     </font>
@@ -35,7 +35,7 @@
             <children>
                 <VBox layoutX="355" layoutY="50" spacing="10" alignment="CENTER">
                     <ChoiceBox fx:id="vehicleTypeChoiceBox" value="Classique" prefWidth="250" style="-fx-background-color: #81A4CD; -fx-text-fill: WHITE; -fx-font-size: 14px;" />
-                    <ChoiceBox fx:id="parkingNameChoiceBox" prefWidth="250" style="-fx-background-color: #81A4CD; -fx-text-fill: WHITE; -fx-font-size: 14px;" />
+                    <ChoiceBox fx:id="parkingNameChoiceBox" value="Hotel de Ville" prefWidth="250" style="-fx-background-color: #81A4CD; -fx-text-fill: WHITE; -fx-font-size: 14px;" />
                     <Button text="Rechercher" onAction="#onSearchPlace" prefWidth="150" style="-fx-background-color: #054a91; -fx-text-fill: WHITE;">
                         <font>
                             <Font size="16" />

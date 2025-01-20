@@ -2,7 +2,7 @@ package fr.insa.horodateurjava;
 
 import fr.insa.horodateurjava.database.dao.ParkingDAO;
 import fr.insa.horodateurjava.database.dao.PlaceDAO;
-import fr.insa.horodateurjava.database.models.Place;
+import fr.insa.horodateurjava.models.Place;
 import fr.insa.horodateurjava.utils.DatabaseHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -95,4 +95,22 @@ public class HomeController {
             throw new RuntimeException(e);
         }
     }
+
+    public void onAdminAccess(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/insa/horodateurjava/views/admin/admin-login-view.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            stage.getScene().setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Problème de navigation");
+            alert.setContentText("Impossible de charger la page de connection.");
+            alert.showAndWait();
+        }
+    }
+
 }

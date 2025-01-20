@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #DBE4EE;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.insa.horodateurjava.adminControllers.PlaceListController">
+    <top>
+        <AnchorPane prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #3;" BorderPane.alignment="CENTER">
+            <children>
+                <Rectangle arcWidth="5.0" cache="true" cacheHint="ROTATE" fill="#3e7cb1" height="75.0" layoutY="75.0" stroke="TRANSPARENT" strokeType="INSIDE" width="1000.0" />
+                <Label layoutX="438.0" layoutY="99.0" text="Liste des places" textFill="WHITE">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Button layoutX="15.0" layoutY="100.0" mnemonicParsing="false" style="-fx-background-color: #81A4CD; -fx-border-radius: 50; -fx-background-radius: 50;" text="&lt; Retour" textFill="WHITE" />
+            </children>
+        </AnchorPane>
+    </top>
+    <center>
+        <AnchorPane prefHeight="450.0" prefWidth="450.0" BorderPane.alignment="CENTER">
+            <children>
+                <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#81a4cd" height="400.0" layoutX="50.0" layoutY="25.0" stroke="TRANSPARENT" strokeType="INSIDE" width="900.0">
+                    <effect>
+                        <DropShadow height="25.0" radius="12.0" width="25.0">
+                            <color>
+                                <Color opacity="0.7284894585609436" />
+                            </color>
+                        </DropShadow>
+                    </effect>
+                </Rectangle>
+                <TableView fx:id="placeTable" fixedCellSize="0.0" layoutX="70.0" layoutY="98.0" prefHeight="300.0" prefWidth="850.0" style="-fx-background-color: #81A4CD;">
+                    <columns>
+                        <TableColumn id="parkingComboBox" fx:id="numeroPlaceColumn" prefWidth="170.0" style="-fx-background-color: #81A4CD; -fx-text-fill: #FFF;" text="Numéro de place" />
+                        <TableColumn fx:id="numeroReservationColumn" prefWidth="170.0" style="-fx-background-color: #81A4CD;" text="Numéro de réservation" />
+                        <TableColumn fx:id="immatriculationColumn" prefWidth="170.0" style="-fx-background-color: #81A4CD;" text="Immatriculation" />
+                        <TableColumn fx:id="dateDebutColumn" prefWidth="170.0" style="-fx-background-color: #81A4CD;" text="Date/Heure Debut" />
+                        <TableColumn fx:id="dateFinColumn" prefWidth="170.0" style="-fx-background-color: #81A4CD;" text="Date/Heure Fin" />
+                    </columns>
+                </TableView>
+            <ComboBox fx:id="parkingComboBox" layoutX="75.0" layoutY="47.0" prefWidth="150.0" promptText="Parking" style="-fx-background-radius: 50; -fx-background-color: #FFF; -fx-padding: 0 0  0 20; -fx-text-fill: #F17300;" />
+            <Button layoutX="239.0" onAction="#handleShowPlaces" layoutY="47.0" mnemonicParsing="false" style="-fx-background-color: #3e7cb1; -fx-border-radius: 50; -fx-background-radius: 50;" text="Afficher" textFill="WHITE" />
+            </children>
+        </AnchorPane>
+    </center>
+</BorderPane>

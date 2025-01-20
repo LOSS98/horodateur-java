@@ -31,7 +31,7 @@ public class ConfirmationController {
     @FXML
     private Label totalPriceLabel;
 
-    public void initialize(String typePlace, String immatriculation, int placeNumero,int etageNumero, String parkingName, LocalDateTime startDateTime, LocalDateTime endDateTime, double tarifHoraire) {
+    public void initialize(String typePlace, String immatriculation, int placeNumero,int etageNumero, String parkingName, LocalDateTime startDateTime, LocalDateTime endDateTime, double totalPrice) {
         typePlaceLabel.setText(typePlace);
         immatriculationLabel.setText(immatriculation);
         placeNumberLabel.setText(String.valueOf(placeNumero));
@@ -46,9 +46,8 @@ public class ConfirmationController {
         startDateLabel.setText(formattedStartDate);
         endDateLabel.setText(formattedEndDate);
 
-        Duration duration = Duration.between(startDateTime, endDateTime);
-        long totalHours = duration.toHours();
-        double totalPrice = totalHours * tarifHoraire;
+
+
         totalPriceLabel.setText(totalPrice + " €");
     }
 

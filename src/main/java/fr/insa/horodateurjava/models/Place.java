@@ -1,4 +1,4 @@
-package fr.insa.horodateurjava.database.models;
+package fr.insa.horodateurjava.models;
 
 public abstract class Place {
     private int numero;
@@ -8,6 +8,20 @@ public abstract class Place {
     private boolean enTravaux;
     private int etage;
     private double tarifHoraire;
+
+    public Place(int numero, int etage, String type, boolean disponibilite, double tarifHoraire, boolean enTravaux, int idParking) {
+        this.numero = numero;
+        this.etage = etage;
+        this.type = type;
+        this.disponibilite = disponibilite;
+        this.tarifHoraire = tarifHoraire;
+        this.enTravaux = enTravaux;
+        this.idParking = idParking;
+    }
+
+    public Place(int numero, int etage,  String type, boolean disponibilite, double tarifHoraire, double puissanceCharge, boolean enTravaux, int idParking) {
+        this(numero, etage, type, disponibilite, tarifHoraire, enTravaux, idParking);
+    }
 
     // Getters et Setters communs
     public int getNumero() {
@@ -69,5 +83,7 @@ public abstract class Place {
     }
 
     // Méthode abstraite pour différencier les sous-classes
-    public abstract String getType();
+    public String getType(){
+        return type;
+    }
 }
