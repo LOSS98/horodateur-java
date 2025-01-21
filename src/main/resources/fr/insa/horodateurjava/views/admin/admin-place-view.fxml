@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #DBE4EE;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.insa.horodateurjava.adminControllers.AdminHomeController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #DBE4EE;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.insa.horodateurjava.adminControllers.AdminHomeController">
    <top>
       <AnchorPane prefHeight="150.0" prefWidth="150.0" BorderPane.alignment="CENTER">
          <children>
@@ -43,7 +43,7 @@
             <TableView fixedCellSize="0.0" layoutX="75.0" layoutY="100.0" prefHeight="300.0" prefWidth="850.0" style="-fx-background-color: #81A4CD;">
                <columns>
                   <TableColumn prefWidth="170.0" style="-fx-background-color: #81A4CD; -fx-text-fill: #FFFFFF;" text="Numero Place" />
-                  <TableColumn prefWidth="170.0" style="-fx-background-color: #81A4CD;" text="Etage" />
+                  <TableColumn prefWidth="170.0" style="-fx-background-color: #81A4CD; -fx-text-fill: #FFFFFF;" text="Etage" />
                   <TableColumn prefWidth="170.0" style="-fx-background-color: #81A4CD;" text="Disponibilité" />
                   <TableColumn prefWidth="170.0" style="-fx-background-color: #81A4CD;" text=" Type de place" />
                   <TableColumn prefWidth="170.0" style="-fx-background-color: #81A4CD;" text="En Travaux" />

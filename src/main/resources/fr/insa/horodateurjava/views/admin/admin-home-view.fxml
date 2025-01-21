@@ -17,8 +17,8 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button cache="true" cacheHint="SPEED" onAction="#onGenerateReport" layoutX="25.0" layoutY="20.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #F17300;" text="Générer un rapport" textFill="WHITE" />
-            <Button cache="true" cacheHint="SPEED" onAction="#onViewHistory" layoutX="200.0" layoutY="20.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #F17300;" text="Consulter l'historique" textFill="WHITE" />
+            <Button cache="true" cacheHint="SPEED" layoutX="25.0" layoutY="20.0" mnemonicParsing="false" onAction="#onGenerateReport" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #F17300;" text="Générer un rapport" textFill="WHITE" />
+            <Button cache="true" cacheHint="SPEED" layoutX="200.0" layoutY="20.0" mnemonicParsing="false" onAction="#onViewHistory" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #F17300;" text="Consulter l'historique" textFill="WHITE" />
             <Button cache="true" cacheHint="SPEED" layoutX="875.0" layoutY="20.0" mnemonicParsing="false" onAction="#onLogout" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #F17300;" text="Déconnexion" textFill="WHITE" />
          </children>
       </AnchorPane>
@@ -26,12 +26,12 @@
    <center>
       <AnchorPane prefHeight="450.0" prefWidth="450.0" BorderPane.alignment="CENTER">
          <children>
-            <Button cache="true" cacheHint="SPEED" layoutX="181.0" layoutY="48.0" mnemonicParsing="false" onAction="#onListParkings" prefHeight="100.0" prefWidth="170.0" style="-fx-background-color: #F17300;" text="Voir les parkings" textFill="WHITE" />
-            <Button cache="true" cacheHint="SPEED" layoutX="415.0" layoutY="48.0" mnemonicParsing="false" onAction="#onListPlaces" prefHeight="100.0" prefWidth="170.0" style="-fx-background-color: #F17300;" text="Voir les places" textFill="WHITE" />
-            <Button cache="true" cacheHint="SPEED" layoutX="642.0" layoutY="48.0" mnemonicParsing="false" onAction="#onListAdmins" prefHeight="100.0" prefWidth="170.0" style="-fx-background-color: #F17300;" text="Voir les administrateurs" textFill="WHITE" />
-            <Button cache="true" cacheHint="SPEED" layoutX="642.0" layoutY="183.0" mnemonicParsing="false" onAction="#onAddAdmin" prefHeight="100.0" prefWidth="170.0" style="-fx-background-color: #F17300;" text="Gérer les administrateurs" textFill="WHITE" />
-            <Button cache="true" cacheHint="SPEED" layoutX="181.0" layoutY="183.0" mnemonicParsing="false" onAction="#onAddParking" prefHeight="100.0" prefWidth="170.0" style="-fx-background-color: #F17300;" text="Gérer les parkings" textFill="WHITE" />
-            <Button cache="true" cacheHint="SPEED" layoutX="415.0" layoutY="189.0" mnemonicParsing="false" onAction="#onAddPlace" prefHeight="100.0" prefWidth="170.0" style="-fx-background-color: #F17300;" text="Gérer les places" textFill="WHITE" />
+            <Button cache="true" cacheHint="SPEED" layoutX="181.0" layoutY="86.0" mnemonicParsing="false" onAction="#onListParkings" prefHeight="100.0" prefWidth="170.0" style="-fx-background-color: #F17300;" text="Voir les parkings" textFill="WHITE" />
+            <Button cache="true" cacheHint="SPEED" layoutX="415.0" layoutY="86.0" mnemonicParsing="false" onAction="#onListPlaces" prefHeight="100.0" prefWidth="170.0" style="-fx-background-color: #F17300;" text="Voir les places" textFill="WHITE" />
+            <Button cache="true" cacheHint="SPEED" layoutX="642.0" layoutY="87.0" mnemonicParsing="false" onAction="#onListAdmins" prefHeight="100.0" prefWidth="170.0" style="-fx-background-color: #F17300;" text="Voir les administrateurs" textFill="WHITE" />
+            <Button cache="true" cacheHint="SPEED" layoutX="642.0" layoutY="224.0" mnemonicParsing="false" onAction="#onAddAdmin" prefHeight="100.0" prefWidth="170.0" style="-fx-background-color: #F17300;" text="Gérer les administrateurs" textFill="WHITE" />
+            <Button cache="true" cacheHint="SPEED" layoutX="181.0" layoutY="224.0" mnemonicParsing="false" onAction="#onAddParking" prefHeight="100.0" prefWidth="170.0" style="-fx-background-color: #F17300;" text="Gérer les parkings" textFill="WHITE" />
+            <Button cache="true" cacheHint="SPEED" layoutX="415.0" layoutY="224.0" mnemonicParsing="false" onAction="#onAddPlace" prefHeight="100.0" prefWidth="170.0" style="-fx-background-color: #F17300;" text="Gérer les places" textFill="WHITE" />
          </children>
       </AnchorPane>
    </center>

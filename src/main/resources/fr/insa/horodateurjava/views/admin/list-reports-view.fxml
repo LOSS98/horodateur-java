@@ -16,7 +16,7 @@
         <AnchorPane prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #3;" BorderPane.alignment="CENTER">
             <children>
                 <Rectangle arcWidth="5.0" cache="true" cacheHint="ROTATE" fill="#3e7cb1" height="75.0" layoutY="75.0" stroke="TRANSPARENT" strokeType="INSIDE" width="1000.0" />
-                <Label layoutX="438.0" layoutY="99.0" text="Liste des places" textFill="WHITE">
+                <Label layoutX="415.0" layoutY="101.0" text="Historique des rappots" textFill="WHITE">
                     <font>
                         <Font size="18.0" />
                     </font>
@@ -37,22 +37,31 @@
                         </DropShadow>
                     </effect>
                 </Rectangle>
-                <TableView fx:id="placeTableView" fixedCellSize="0.0" layoutX="70.0" layoutY="70.0" prefHeight="300.0" prefWidth="850.0" style="-fx-background-color: #81A4CD;">
+                <TableView fx:id="placeTableView" fixedCellSize="0.0" layoutX="70.0" layoutY="86.0" prefHeight="300.0" prefWidth="850.0" style="-fx-background-color: #FFF; -fx-padding: 10; -fx-background-radius: 10 10 10 10;">
                     <columns>
-                        <TableColumn id="parkingComboBox" fx:id="idColumn" prefWidth="67.19998168945312" style="-fx-background-color: #81A4CD; -fx-text-fill: #FFF;" text="ID" />
-                        <TableColumn fx:id="occupationColumn" prefWidth="141.6000518798828" style="-fx-background-color: #81A4CD;" text="Taux d'occupation" />
-                        <TableColumn fx:id="recettesColumn" prefWidth="144.79998779296875" style="-fx-background-color: #81A4CD;" text="Total des recettes" />
-                        <TableColumn fx:id="startColumn" prefWidth="165.5999755859375" style="-fx-background-color: #81A4CD;" text="Du" />
-                        <TableColumn fx:id="endColumn" prefWidth="176.0" style="-fx-background-color: #81A4CD;" text="Au" />
-                  <TableColumn fx:id="generatedByColumn" prefWidth="155.99993896484375" style="-fx-background-color: #81A4CD;" text="Généré par" />
+                        <TableColumn id="parkingComboBox" fx:id="idColumn" prefWidth="68.68226623535156" style="-fx-background-color: #81A4CD; -fx-text-fill: #FFF; -fx-alignment: CENTER; -fx-font-size: 13;" text="ID" />
+                        <TableColumn fx:id="occupationColumn" prefWidth="140.81771850585938" style="-fx-background-color: #81A4CD; -fx-text-fill: #FFF; -fx-alignment: CENTER;" text="Taux d'occupation" />
+                        <TableColumn fx:id="recettesColumn" prefWidth="144.79998779296875" style="-fx-background-color: #81A4CD; -fx-text-fill: #FFF; -fx-alignment: CENTER;" text="Total des recettes" />
+                        <TableColumn fx:id="startColumn" prefWidth="165.5999755859375" style="-fx-background-color: #81A4CD; -fx-text-fill: #FFF; -fx-alignment: CENTER;" text="Du" />
+                        <TableColumn fx:id="endColumn" prefWidth="176.0" style="-fx-background-color: #81A4CD; -fx-text-fill: #FFF; -fx-alignment: CENTER;" text="Au" />
+                  <TableColumn fx:id="generatedByColumn" prefWidth="155.99993896484375" style="-fx-background-color: #81A4CD; -fx-text-fill: #FFF; -fx-alignment: CENTER;" text="Généré par" />
                     </columns>
                 </TableView>
-            <Label fx:id="countField" layoutX="843.0" layoutY="28.0" prefHeight="27.0" prefWidth="62.0" text="0" textFill="WHITE">
+            <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#f17300" height="44.0" layoutX="795.0" layoutY="31.0" stroke="TRANSPARENT" strokeType="INSIDE" width="146.0">
+               <effect>
+                  <DropShadow height="25.0" radius="12.0" width="25.0">
+                     <color>
+                        <Color opacity="0.0" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </Rectangle>
+            <Label fx:id="countField" layoutX="805.0" layoutY="38.0" prefHeight="27.0" prefWidth="62.0" text="0" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label layoutX="843.0" layoutY="47.0" text="Rapports générés" textFill="WHITE" />
+            <Label layoutX="836.0" layoutY="43.0" text="Rapports générés" textFill="WHITE" />
             </children>
         </AnchorPane>
     </center>

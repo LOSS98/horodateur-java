@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #DBE4EE;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.insa.horodateurjava.adminControllers.ParkingListController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #DBE4EE;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.insa.horodateurjava.adminControllers.ParkingListController">
     <top>
         <AnchorPane prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #3;" BorderPane.alignment="CENTER">
             <children>
@@ -37,21 +37,33 @@
                         </DropShadow>
                     </effect>
                 </Rectangle>
-                <TableView fx:id="placeTableView" fixedCellSize="0.0" layoutX="70.0" layoutY="98.0" prefHeight="300.0" prefWidth="850.0" style="-fx-background-color: #81A4CD;">
+                <TableView fx:id="placeTableView" fixedCellSize="0.0" layoutX="70.0" layoutY="98.0" prefHeight="300.0" prefWidth="850.0" style="-fx-background-color: #FFF; -fx-background-radius: 20; -fx-padding: 10 10 10 10;">
                     <columns>
-                        <TableColumn id="parkingComboBox" fx:id="idColumn" prefWidth="121.42" style="-fx-background-color: #81A4CD; -fx-text-fill: #FFF;" text="ID" />
-                        <TableColumn fx:id="nomColumn" prefWidth="108.00001525878906" style="-fx-background-color: #81A4CD;" text="Nom" />
-                        <TableColumn fx:id="adresseColumn" prefWidth="312.79998779296875" style="-fx-background-color: #81A4CD;" text="Adresse" />
-                        <TableColumn fx:id="capColumn" prefWidth="120.79998779296875" style="-fx-background-color: #81A4CD;" text="Capacité de places" />
-                  <TableColumn fx:id="placesCountColumn" prefWidth="185.5999755859375" style="-fx-background-color: #81A4CD;" text="Nombre de places déclarées" />
+                        <TableColumn id="parkingComboBox" fx:id="idColumn" prefWidth="71.0570297241211" style="-fx-background-color: #81A4CD; -fx-text-fill: #FFF; -fx-alignment: CENTER; -fx-font-size: 13;" text="ID" />
+                        <TableColumn fx:id="nomColumn" prefWidth="123.55355834960938" style="-fx-background-color: #81A4CD; -fx-text-fill: #FFF; -fx-alignment: CENTER; -fx-font-size: 13;" text="Nom" />
+                        <TableColumn fx:id="adresseColumn" prefWidth="278.8529968261719" style="-fx-background-color: #81A4CD; -fx-text-fill: #FFF; -fx-alignment: CENTER; -fx-font-size: 13;" text="Adresse" />
+                        <TableColumn fx:id="capColumn" prefWidth="143.64700317382812" style="-fx-background-color: #81A4CD; -fx-text-fill: #FFF; -fx-alignment: CENTER; -fx-font-size: 13;" text="Capacité de places" />
+                  <TableColumn fx:id="placesCountColumn" prefWidth="211.7335205078125" style="-fx-background-color: #81A4CD; -fx-text-fill: #FFF; -fx-alignment: CENTER; -fx-font-size: 13;" text="Nombre de places déclarées" />
                     </columns>
                 </TableView>
-            <Label fx:id="parkingCountField" layoutX="843.0" layoutY="28.0" prefHeight="27.0" prefWidth="62.0" text="0" textFill="WHITE">
+            <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#f17300" height="49.0" layoutX="795.0" layoutY="31.0" stroke="TRANSPARENT" strokeType="INSIDE" width="146.0">
+               <effect>
+                  <DropShadow height="25.0" radius="12.0" width="25.0">
+                     <color>
+                        <Color opacity="0.0" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </Rectangle>
+            <Label fx:id="parkingCountField" layoutX="818.0" layoutY="43.0" prefHeight="27.0" prefWidth="62.0" text="0" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label layoutX="843.0" layoutY="50.0" text="Parkings" textFill="WHITE" />
+            <Label layoutX="857.0" layoutY="45.0" text="Parkings" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font></Label>
             </children>
         </AnchorPane>
     </center>

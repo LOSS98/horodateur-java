@@ -28,7 +28,7 @@
     <center>
         <AnchorPane prefHeight="450.0" prefWidth="450.0" BorderPane.alignment="CENTER">
             <children>
-                <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#81a4cd" height="400.0" layoutX="50.0" layoutY="25.0" stroke="TRANSPARENT" strokeType="INSIDE" width="900.0">
+                <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#81a4cd" height="400.0" layoutX="39.0" layoutY="27.0" stroke="TRANSPARENT" strokeType="INSIDE" width="917.0">
                     <effect>
                         <DropShadow height="25.0" radius="12.0" width="25.0">
                             <color>
@@ -37,23 +37,32 @@
                         </DropShadow>
                     </effect>
                 </Rectangle>
-                <TableView fx:id="placeTableView" fixedCellSize="0.0" layoutX="70.0" layoutY="98.0" prefHeight="300.0" prefWidth="850.0" style="-fx-background-color: #81A4CD;">
+                <TableView fx:id="placeTableView" fixedCellSize="0.0" layoutX="59.0" layoutY="100.0" prefHeight="300.0" prefWidth="877.0" style="-fx-background-color: #FFF; -fx-padding: 10 10 10 10; -fx-background-radius: 20;">
                     <columns>
-                        <TableColumn id="parkingComboBox" fx:id="idColumn" prefWidth="121.42" style="-fx-background-color: #81A4CD; -fx-text-fill: #FFF;" text="ID" />
-                        <TableColumn fx:id="immaColumn" prefWidth="108.00001525878906" style="-fx-background-color: #81A4CD;" text="Immatriculation" />
-                        <TableColumn fx:id="numColumn" prefWidth="121.42" style="-fx-background-color: #81A4CD;" text="N° Place" />
-                        <TableColumn fx:id="parkingColumn" prefWidth="121.42" style="-fx-background-color: #81A4CD;" text="Parking" />
-                        <TableColumn fx:id="startColumn" prefWidth="121.42" style="-fx-background-color: #81A4CD;" text="Heure début" />
-                  <TableColumn fx:id="endColumn" prefWidth="151.20013427734375" style="-fx-background-color: #81A4CD;" text="Heure fin" />
-                  <TableColumn fx:id="priceColumn" prefWidth="103.1998291015625" style="-fx-background-color: #81A4CD;" text="Prix en €" />
+                        <TableColumn id="parkingComboBox" fx:id="idColumn" prefWidth="121.42" style="-fx-background-color: #81A4CD; -fx-text-fill: #FFF; -fx-alignment: CENTER; -fx-font-size: 16;" text="ID" />
+                        <TableColumn fx:id="immaColumn" prefWidth="108.00001525878906" style="-fx-background-color: #81A4CD; -fx-text-fill: #FFF; -fx-alignment: CENTER; -fx-font-size: 13;" text="Immatriculation" />
+                        <TableColumn fx:id="numColumn" prefWidth="121.42" style="-fx-background-color: #81A4CD; -fx-text-fill: #FFF; -fx-alignment: CENTER; -fx-font-size: 13;" text="N° Place" />
+                        <TableColumn fx:id="parkingColumn" prefWidth="121.42" style="-fx-background-color: #81A4CD; -fx-text-fill: #FFF; -fx-alignment: CENTER; -fx-font-size: 13;" text="Parking" />
+                        <TableColumn fx:id="startColumn" prefWidth="121.42" style="-fx-background-color: #81A4CD; -fx-text-fill: #FFF; -fx-alignment: CENTER; -fx-font-size: 13;" text="Heure début" />
+                  <TableColumn fx:id="endColumn" prefWidth="151.20013427734375" style="-fx-background-color: #81A4CD; -fx-text-fill: #FFF; -fx-alignment: CENTER; -fx-font-size: 13;" text="Heure fin" />
+                  <TableColumn fx:id="priceColumn" prefWidth="110.1998291015625" style="-fx-background-color: #81A4CD; -fx-text-fill: #FFF; -fx-alignment: CENTER; -fx-font-size: 13;" text="Prix en €" />
                     </columns>
                 </TableView>
-            <Label fx:id="currentPlacesField" layoutX="843.0" layoutY="28.0" prefHeight="27.0" prefWidth="62.0" text="0" textFill="WHITE">
+            <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#f17300" height="49.0" layoutX="801.0" layoutY="36.0" stroke="TRANSPARENT" strokeType="INSIDE" width="146.0">
+               <effect>
+                  <DropShadow height="25.0" radius="12.0" width="25.0">
+                     <color>
+                        <Color opacity="0.0" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </Rectangle>
+            <Label fx:id="currentPlacesField" layoutX="824.0" layoutY="47.0" prefHeight="27.0" prefWidth="62.0" text="0" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label layoutX="843.0" layoutY="46.0" text="Réservations" textFill="WHITE" />
+            <Label layoutX="860.0" layoutY="52.0" text="Réservations" textFill="WHITE" />
             </children>
         </AnchorPane>
     </center>

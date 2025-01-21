@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600" prefWidth="1000" style="-fx-background-color: DBE4EE;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.insa.horodateurjava.adminControllers.AdminController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600" prefWidth="1000" style="-fx-background-color: DBE4EE;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.insa.horodateurjava.adminControllers.AdminController">
     <top>
         <AnchorPane prefHeight="150" prefWidth="800" BorderPane.alignment="CENTER">
             <children>
@@ -42,7 +42,7 @@
                 <TextField fx:id="firstNameField" layoutX="492.0" layoutY="92.0" prefWidth="200" style="-fx-background-color: #81A4CD; -fx-text-fill: WHITE; -fx-font-size: 14px;" />
                 <HBox layoutX="528" layoutY="202" spacing="10" />
 
-                <Button layoutX="721.0" layoutY="283.0" mnemonicParsing="false" onAction="#handleAddAdmin" prefHeight="30" prefWidth="100" style="-fx-background-color: #054A91;" text="Ajouter" textFill="WHITE">
+                <Button layoutX="639.0" layoutY="284.0" mnemonicParsing="false" onAction="#handleAddAdmin" prefHeight="30" prefWidth="100" style="-fx-background-color: #054A91;" text="Ajouter" textFill="WHITE">
                     <font>
                         <Font size="14" />
                     </font>
@@ -73,12 +73,12 @@
             <TextField fx:id="emailField" layoutX="492.0" layoutY="163.0" prefWidth="200" style="-fx-background-color: #81A4CD; -fx-text-fill: WHITE; -fx-font-size: 14px;" />
             <PasswordField fx:id="passField" layoutX="492.0" layoutY="198.0" prefHeight="25.0" prefWidth="201.0" style="-fx-background-color: #81A4CD; -fx-text-fill: WHITE; -fx-font-size: 14px;" />
             <PasswordField fx:id="CpassField" layoutX="492.0" layoutY="234.0" prefHeight="25.0" prefWidth="201.0" style="-fx-background-color: #81A4CD; -fx-text-fill: WHITE; -fx-font-size: 14px;" />
-            <Button layoutX="609.0" layoutY="283.0" mnemonicParsing="false" onAction="#handleUpdateAdmin" prefHeight="30" prefWidth="100" style="-fx-background-color: #054A91;" text="Modifier" textFill="WHITE">
+            <Button layoutX="497.0" layoutY="283.0" mnemonicParsing="false" onAction="#handleUpdateAdmin" prefHeight="30" prefWidth="100" style="-fx-background-color: #054A91;" text="Modifier" textFill="WHITE">
                <font>
                   <Font size="14" />
                </font>
             </Button>
-            <Button layoutX="260.0" layoutY="283.0" mnemonicParsing="false" onAction="#handleDeleteAdmin" prefHeight="30" prefWidth="100" style="-fx-background-color: #054A91;" text="Supprimer" textFill="WHITE">
+            <Button layoutX="357.0" layoutY="283.0" mnemonicParsing="false" onAction="#handleDeleteAdmin" prefHeight="30" prefWidth="100" style="-fx-background-color: #054A91;" text="Supprimer" textFill="WHITE">
                <font>
                   <Font size="14" />
                </font>
