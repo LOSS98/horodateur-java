@@ -11,58 +11,56 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import javafx.scene.control.ComboBox;
 import java.io.IOException;
 import java.sql.Connection;
 import java.util.List;
 
+/**
+ * Contrôleur pour la gestion des places de parking.
+ * Gère l'ajout, la suppression, la mise à jour des places et leur liaison avec un parking spécifique.
+ */
 public class PlaceController {
 
     @FXML
-    private ComboBox<String> parkingComboBox;
+    private ComboBox<String> parkingComboBox; // Liste déroulante des parkings disponibles
 
     @FXML
-    private TextField numeroField;
+    private TextField numeroField; // Champ pour le numéro de la place
 
     @FXML
-    private TextField etageField;
+    private TextField etageField; // Champ pour l'étage
 
     @FXML
-    private ComboBox<String> typeComboBox;
+    private ComboBox<String> typeComboBox; // Liste déroulante pour sélectionner le type de place
 
     @FXML
-    private TextField tarifHoraireField;
+    private TextField tarifHoraireField; // Champ pour le tarif horaire
 
     @FXML
-    private TextField puissanceChargeField;
+    private TextField puissanceChargeField; // Champ pour la puissance de charge (si applicable)
 
     @FXML
-    private ComboBox<String> enTravauxComboBox;
+    private ComboBox<String> enTravauxComboBox; // Liste déroulante pour indiquer si la place est en travaux
 
     @FXML
-    private Label messageLabel;
+    private Label messageLabel; // Label pour afficher les messages d'erreur ou de succès
 
+    /**
+     * Initialise les données et configure les listes déroulantes.
+     */
     public void initialize() {
-        // Charger les parkings
         loadParkingNames();
-
-        // Charger les types de places
         typeComboBox.getItems().addAll("Classique", "DeuxRoues", "Famille", "Handicape", "RechargeElectrique");
-
-        // Charger les options En Travaux
         enTravauxComboBox.getItems().addAll("Oui", "Non");
     }
 
+    /**
+     * Charge les noms des parkings dans la liste déroulante.
+     */
     private void loadParkingNames() {
         try (Connection connection = DatabaseHandler.getConnection()) {
             ParkingDAO parkingDAO = new ParkingDAO(connection);
-
             List<String> parkingNames = parkingDAO.getAllParkingNamesWithIds();
-            if (parkingNames.isEmpty()) {
-                System.out.println("Aucun parking trouvé dans la base de données.");
-            } else {
-                System.out.println("Parkings chargés");
-            }
 
             parkingComboBox.getItems().clear();
             parkingComboBox.getItems().addAll(parkingNames);
@@ -72,136 +70,66 @@ public class PlaceController {
         }
     }
 
-
+    /**
+     * Gère l'ajout d'une nouvelle place.
+     */
     @FXML
     public void handleAddPlace() {
         try {
-            // Récupérer les données utilisateur
             String parkingOption = parkingComboBox.getValue();
             String numeroText = numeroField.getText().trim();
             String etageText = etageField.getText().trim();
             String type = typeComboBox.getValue();
             String tarifText = tarifHoraireField.getText().trim();
             String puissanceText = puissanceChargeField.getText().trim();
-            boolean enTravaux = enTravauxComboBox.equals("Oui");
+            String enTravauxOption = enTravauxComboBox.getValue();
 
             // Validation des champs
-            if (parkingOption == null || parkingOption.isEmpty()) {
-                messageLabel.setText("Erreur : Veuillez sélectionner un parking.");
+            if (parkingOption == null || numeroText.isEmpty() || etageText.isEmpty() || type == null || tarifText.isEmpty()) {
+                messageLabel.setText("Erreur : Tous les champs obligatoires doivent être remplis.");
                 return;
             }
 
-            if (numeroText.isEmpty()) {
-                messageLabel.setText("Erreur : Veuillez saisir un numéro de place.");
-                return;
-            }
-
-            if (etageText.isEmpty()) {
-                messageLabel.setText("Erreur : Veuillez saisir un étage.");
-                return;
-            }
-
-            if (type == null || type.isEmpty()) {
-                messageLabel.setText("Erreur : Veuillez sélectionner un type de place.");
-                return;
-            }
-
-            if (tarifText.isEmpty()) {
-                messageLabel.setText("Erreur : Veuillez saisir un tarif horaire.");
-                return;
-            }
-
-            if (type.equals("RechargeElectrique") && (puissanceText.isEmpty() || puissanceText.trim().equals("0"))) {
-                messageLabel.setText("Erreur : Veuillez saisir une puissance de charge pour une place Recharge Électrique.");
-                return;
-            }
-
-            if (enTravauxComboBox == null) {
-                messageLabel.setText("Erreur : Veuillez sélectionner une option pour 'En Travaux'.");
-                return;
-            }
-
-
-
-            // Extraire ID du parking
             int parkingId = Integer.parseInt(parkingOption.split(" - ")[0]);
+            int numero = Integer.parseInt(numeroText);
             int etage = Integer.parseInt(etageText);
             double tarifHoraire = Double.parseDouble(tarifText);
-            double puissanceCharge = 0.0;
-            int numero = Integer.parseInt(numeroField.getText().trim());
+            double puissanceCharge = "RechargeElectrique".equals(type) ? Double.parseDouble(puissanceText) : 0.0;
+            boolean enTravaux = "Oui".equals(enTravauxOption);
 
-            try (Connection connection = DatabaseHandler.getConnection()) {
-                ParkingDAO parkingDAO = new ParkingDAO(connection);
-                int totalCapacity = parkingDAO.getParkingCapacity(parkingId);
-                int currentPlacesCount = parkingDAO.getParkingCurrentPlacesCount(parkingId);
-                if (currentPlacesCount >= totalCapacity) {
-                    messageLabel.setText("Erreur : Capacité maximale du parking atteinte.");
-                    return;
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                showAlert(Alert.AlertType.ERROR, "Erreur", "Erreur lors de la vérification de capacité.");
-            }
-
-            // Vérifier la puissance de charge si nécessaire
-            if ("RechargeElectrique".equals(type)) {
-                if (puissanceText.isEmpty()) {
-                    messageLabel.setText("Erreur : la puissance de charge est requise pour une place RechargeElectrique.");
-                    return;
-                }
-                puissanceCharge = Double.parseDouble(puissanceText);
-                if (puissanceCharge <= 0) {
-                    messageLabel.setText("Erreur : la puissance de charge doit être un nombre positif.");
-                    return;
-                }
-            }
-
-            // Créer un objet Place spécifique au typeSS
-            Place place;
-            switch (type) {
-                case "Classique" -> place = new PlaceClassique(numero, etage, tarifHoraire, enTravaux, parkingId);
-                case "DeuxRoues" -> place = new PlaceDeuxRoues(numero, etage, tarifHoraire, enTravaux, parkingId);
-                case "Famille" -> place = new PlaceFamille(numero, etage, tarifHoraire, enTravaux, parkingId);
-                case "Handicape" -> place = new PlaceHandicape(numero, etage, tarifHoraire, enTravaux, parkingId);
-                case "RechargeElectrique" -> place = new PlaceRechargeElectrique(numero, etage, tarifHoraire, puissanceCharge, enTravaux, parkingId);
-                default -> throw new IllegalArgumentException("Type de place inconnu : " + type);
-            }
-
-
-
-            // Insérer dans la base de données
             try (Connection connection = DatabaseHandler.getConnection()) {
                 PlaceDAO placeDAO = new PlaceDAO(connection);
+
                 if (placeDAO.existsByNumeroAndIdParking(numero, parkingId)) {
-                    messageLabel.setText("Erreur : Une place avec ce numéro existe déjà dans ce parking.");
+                    messageLabel.setText("Erreur : Une place avec ce numéro existe déjà.");
                     return;
                 }
+
+                Place place = createPlaceByType(type, numero, etage, tarifHoraire, puissanceCharge, enTravaux, parkingId);
                 placeDAO.addPlace(place);
 
                 showAlert(Alert.AlertType.INFORMATION, "Succès", "La place a été ajoutée avec succès !");
                 clearFields();
             }
         } catch (NumberFormatException e) {
-            messageLabel.setText("Erreur : certains champs doivent être des nombres valides.");
+            messageLabel.setText("Erreur : Certains champs doivent contenir des nombres valides.");
         } catch (Exception e) {
             e.printStackTrace();
             showAlert(Alert.AlertType.ERROR, "Erreur", "Une erreur s'est produite lors de l'ajout de la place.");
         }
     }
 
+    /**
+     * Gère la suppression d'une place.
+     */
     @FXML
     private void handleDeletePlace() {
         try {
             String parkingOption = parkingComboBox.getValue();
             String numeroText = numeroField.getText().trim();
 
-            if (parkingOption == null || parkingOption.isEmpty()) {
-                messageLabel.setText("Erreur : Veuillez sélectionner un parking.");
-                return;
-            }
-
-            if (numeroText.isEmpty()) {
-                messageLabel.setText("Erreur : Veuillez saisir un numéro de place.");
+            if (parkingOption == null || numeroText.isEmpty()) {
+                messageLabel.setText("Erreur : Veuillez fournir le parking et le numéro de la place.");
                 return;
             }
 
@@ -221,99 +149,89 @@ public class PlaceController {
                 clearFields();
             }
         } catch (NumberFormatException e) {
-            messageLabel.setText("Erreur : Veuillez saisir des nombres valides.");
+            messageLabel.setText("Erreur : Veuillez fournir des nombres valides.");
         } catch (Exception e) {
             e.printStackTrace();
             showAlert(Alert.AlertType.ERROR, "Erreur", "Une erreur s'est produite lors de la suppression de la place.");
         }
     }
 
+    /**
+     * Gère la mise à jour d'une place existante.
+     */
     @FXML
     public void handleUpdatePlace() {
         try {
-            // Récupérer le parking et le numéro pour identifier la place à mettre à jour
             String parkingOption = parkingComboBox.getValue();
             String numeroText = numeroField.getText().trim();
 
-            if (parkingOption == null || parkingOption.isEmpty()) {
-                messageLabel.setText("Erreur : Veuillez sélectionner un parking.");
-                return;
-            }
-
-            if (numeroText.isEmpty()) {
-                messageLabel.setText("Erreur : Veuillez saisir un numéro de place.");
+            if (parkingOption == null || numeroText.isEmpty()) {
+                messageLabel.setText("Erreur : Parking et numéro de place sont requis.");
                 return;
             }
 
             int parkingId = Integer.parseInt(parkingOption.split(" - ")[0]);
             int numero = Integer.parseInt(numeroText);
 
-            // Récupérer les autres champs (peuvent être vides)
-            String etageText = etageField.getText().trim();
-            String type = typeComboBox.getValue();
-            String tarifText = tarifHoraireField.getText().trim();
-            String puissanceText = puissanceChargeField.getText().trim();
-            String enTravauxOption = enTravauxComboBox.getValue();
-
-            // Préparer les données pour la mise à jour
-            Integer etage = etageText.isEmpty() ? null : Integer.parseInt(etageText);
-            Double tarifHoraire = tarifText.isEmpty() ? null : Double.parseDouble(tarifText);
-            Double puissanceCharge = puissanceText.isEmpty() ? null : Double.parseDouble(puissanceText);
-            Boolean enTravaux = enTravauxOption == null ? null : enTravauxOption.equals("Oui");
-
-            // Créer une connexion et appeler le DAO
             try (Connection connection = DatabaseHandler.getConnection()) {
                 PlaceDAO placeDAO = new PlaceDAO(connection);
 
-                // Vérifier si la place existe
                 if (!placeDAO.existsByNumeroAndIdParking(numero, parkingId)) {
-                    messageLabel.setText("Erreur : Aucune place trouvée avec ce numéro et ce parking.");
+                    messageLabel.setText("Erreur : Aucune place trouvée avec ce numéro.");
                     return;
                 }
 
-                // Mettre à jour la place
-                placeDAO.updatePlace(parkingId, numero, etage, type, tarifHoraire, puissanceCharge, enTravaux);
+                // Récupérer les champs pour mise à jour
+                Integer etage = etageField.getText().isEmpty() ? null : Integer.parseInt(etageField.getText());
+                Double tarif = tarifHoraireField.getText().isEmpty() ? null : Double.parseDouble(tarifHoraireField.getText());
+                Double puissance = puissanceChargeField.getText().isEmpty() ? null : Double.parseDouble(puissanceChargeField.getText());
+                Boolean enTravaux = "Oui".equals(enTravauxComboBox.getValue());
 
-                showAlert(Alert.AlertType.INFORMATION, "Succès", "La place a été mise à jour avec succès !");
+                placeDAO.updatePlace(parkingId, numero, etage, typeComboBox.getValue(), tarif, puissance, enTravaux);
+
+                showAlert(Alert.AlertType.INFORMATION, "Succès", "La place a été mise à jour !");
                 clearFields();
             }
-        } catch (NumberFormatException e) {
-            messageLabel.setText("Erreur : certains champs doivent être des nombres valides.");
         } catch (Exception e) {
             e.printStackTrace();
-            showAlert(Alert.AlertType.ERROR, "Erreur", "Une erreur s'est produite lors de la mise à jour de la place.");
+            showAlert(Alert.AlertType.ERROR, "Erreur", "Une erreur s'est produite lors de la mise à jour.");
         }
     }
 
+    /**
+     * Crée un objet Place en fonction du type sélectionné.
+     */
+    private Place createPlaceByType(String type, int numero, int etage, double tarif, double puissance, boolean enTravaux, int parkingId) {
+        return switch (type) {
+            case "Classique" -> new PlaceClassique(numero, etage, tarif, enTravaux, parkingId);
+            case "DeuxRoues" -> new PlaceDeuxRoues(numero, etage, tarif, enTravaux, parkingId);
+            case "Famille" -> new PlaceFamille(numero, etage, tarif, enTravaux, parkingId);
+            case "Handicape" -> new PlaceHandicape(numero, etage, tarif, enTravaux, parkingId);
+            case "RechargeElectrique" -> new PlaceRechargeElectrique(numero, etage, tarif, puissance, enTravaux, parkingId);
+            default -> throw new IllegalArgumentException("Type inconnu : " + type);
+        };
+    }
 
-
+    /**
+     * Retourne à la page d'accueil administrateur.
+     */
     @FXML
     private void handleBackLinkAction(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/insa/horodateurjava/views/admin/admin-home-view.fxml"));
             Parent root = loader.load();
-
-            // Obtenir la fenêtre actuelle
             Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-
-            // Charger la nouvelle scène
-            currentStage.setScene(scene);
+            currentStage.setScene(new Scene(root));
             currentStage.setTitle("Accueil Admin");
         } catch (IOException e) {
             e.printStackTrace();
-            showAlert(Alert.AlertType.ERROR, "Erreur", "Impossible de retourner à la page d'accueil admin.");
+            showAlert(Alert.AlertType.ERROR, "Erreur", "Impossible de retourner à l'accueil.");
         }
     }
 
-    private void showAlert(Alert.AlertType alertType, String title, String message) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
+    /**
+     * Réinitialise les champs du formulaire.
+     */
     private void clearFields() {
         parkingComboBox.setValue(null);
         numeroField.clear();
@@ -323,5 +241,16 @@ public class PlaceController {
         puissanceChargeField.clear();
         enTravauxComboBox.setValue(null);
         messageLabel.setText("");
+    }
+
+    /**
+     * Affiche une alerte à l'utilisateur.
+     */
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

@@ -15,22 +15,25 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.Connection;
 
+/**
+ * Contrôleur pour la gestion des parkings (ajout, modification, suppression).
+ */
 public class ParkingController {
 
     @FXML
-    private TextField idField;
+    private TextField idField; // Champ pour l'ID du parking
 
     @FXML
-    private TextField nameField;
+    private TextField nameField; // Champ pour le nom du parking
 
     @FXML
-    private TextField addressField;
+    private TextField addressField; // Champ pour l'adresse du parking
 
     @FXML
-    private TextField placesField;
+    private TextField placesField; // Champ pour le nombre de places
 
     /**
-     * Méthode pour ajouter un nouveau parking
+     * Méthode pour ajouter un nouveau parking.
      */
     @FXML
     private void handleAddParking() {
@@ -38,11 +41,13 @@ public class ParkingController {
         String address = addressField.getText().trim();
         String placesText = placesField.getText().trim();
 
+        // Vérification des champs vides
         if (name.isEmpty() || address.isEmpty() || placesText.isEmpty()) {
             showAlert(Alert.AlertType.WARNING, "Champs manquants", "Veuillez remplir tous les champs !");
             return;
         }
 
+        // Vérification et conversion du nombre de places
         int places;
         try {
             places = Integer.parseInt(placesText);
@@ -55,9 +60,10 @@ public class ParkingController {
             return;
         }
 
+        // Ajout du parking via le DAO
         try (Connection connection = DatabaseHandler.getConnection()) {
             ParkingDAO parkingDAO = new ParkingDAO(connection);
-            parkingDAO.addParking(name, address, places); // Utilise les méthodes DAO
+            parkingDAO.addParking(name, address, places);
             showAlert(Alert.AlertType.INFORMATION, "Succès", "Le parking a été ajouté avec succès !");
             clearFields();
         } catch (Exception e) {
@@ -67,7 +73,7 @@ public class ParkingController {
     }
 
     /**
-     * Méthode pour modifier un parking existant
+     * Méthode pour modifier un parking existant.
      */
     @FXML
     private void handleUpdateParking() {
@@ -76,6 +82,7 @@ public class ParkingController {
         String address = addressField.getText().trim();
         String placesText = placesField.getText().trim();
 
+        // Vérification de l'ID
         if (idText.isEmpty()) {
             showAlert(Alert.AlertType.WARNING, "Champs manquants", "Veuillez fournir l'ID du parking à modifier.");
             return;
@@ -89,6 +96,7 @@ public class ParkingController {
             return;
         }
 
+        // Validation du nombre de places (si renseigné)
         Integer places = null;
         if (!placesText.isEmpty()) {
             try {
@@ -103,6 +111,7 @@ public class ParkingController {
             }
         }
 
+        // Mise à jour du parking via le DAO
         try (Connection connection = DatabaseHandler.getConnection()) {
             ParkingDAO parkingDAO = new ParkingDAO(connection);
             if (!parkingDAO.updateParking(id, name, address, places)) {
@@ -118,12 +127,13 @@ public class ParkingController {
     }
 
     /**
-     * Méthode pour supprimer un parking
+     * Méthode pour supprimer un parking.
      */
     @FXML
     private void handleDeleteParking() {
         String idText = idField.getText().trim();
 
+        // Vérification de l'ID
         if (idText.isEmpty()) {
             showAlert(Alert.AlertType.WARNING, "Champs manquants", "Veuillez fournir l'ID du parking à supprimer.");
             return;
@@ -137,6 +147,7 @@ public class ParkingController {
             return;
         }
 
+        // Suppression du parking via le DAO
         try (Connection connection = DatabaseHandler.getConnection()) {
             ParkingDAO parkingDAO = new ParkingDAO(connection);
             if (!parkingDAO.deleteParking(id)) {
@@ -151,6 +162,13 @@ public class ParkingController {
         }
     }
 
+    /**
+     * Affiche une alerte à l'utilisateur.
+     *
+     * @param alertType Type d'alerte (WARNING, INFORMATION, ERROR).
+     * @param title     Titre de l'alerte.
+     * @param content   Contenu du message.
+     */
     private void showAlert(Alert.AlertType alertType, String title, String content) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
@@ -159,6 +177,9 @@ public class ParkingController {
         alert.showAndWait();
     }
 
+    /**
+     * Efface les champs de saisie du formulaire.
+     */
     private void clearFields() {
         idField.clear();
         nameField.clear();
@@ -166,14 +187,17 @@ public class ParkingController {
         placesField.clear();
     }
 
-
+    /**
+     * Gère le retour à la page précédente.
+     *
+     * @param actionEvent L'événement déclencheur.
+     */
     public void handleBackLinkAction(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/insa/horodateurjava/views/admin/admin-home-view.fxml"));
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-
             stage.setScene(new Scene(root));
             stage.setTitle("Accueil");
             stage.show();

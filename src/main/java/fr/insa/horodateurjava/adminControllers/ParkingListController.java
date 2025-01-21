@@ -21,53 +21,65 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.util.List;
 
+/**
+ * Contrôleur pour afficher la liste des parkings et gérer les interactions utilisateur associées.
+ */
 public class ParkingListController {
 
     @FXML
-    private TableView<Parking> placeTableView;
+    private TableView<Parking> placeTableView; // TableView pour afficher la liste des parkings
 
     @FXML
-    private TableColumn<Parking, Integer> idColumn;
+    private TableColumn<Parking, Integer> idColumn; // Colonne pour l'ID du parking
 
     @FXML
-    private TableColumn<Parking, String> nomColumn;
+    private TableColumn<Parking, String> nomColumn; // Colonne pour le nom du parking
 
     @FXML
-    private TableColumn<Parking, String> adresseColumn;
+    private TableColumn<Parking, String> adresseColumn; // Colonne pour l'adresse du parking
 
     @FXML
-    private TableColumn<Parking, Integer> capColumn;
+    private TableColumn<Parking, Integer> capColumn; // Colonne pour la capacité totale du parking
 
     @FXML
-    private TableColumn<Parking, Integer> placesCountColumn;
+    private TableColumn<Parking, Integer> placesCountColumn; // Colonne pour le nombre de places déclarées
 
     @FXML
-    private Label parkingCountField;
+    private Label parkingCountField; // Label pour afficher le nombre total de parkings
 
     private ObservableList<Parking> parkingList = FXCollections.observableArrayList();
 
+    /**
+     * Méthode d'initialisation appelée automatiquement après le chargement de la vue.
+     */
     public void initialize() {
-        // Configuration des colonnes
+        // Configuration des colonnes du TableView
         idColumn.setCellValueFactory(new PropertyValueFactory<>("idParking"));
         nomColumn.setCellValueFactory(new PropertyValueFactory<>("nomDuParking"));
         adresseColumn.setCellValueFactory(new PropertyValueFactory<>("adresseDuParking"));
         capColumn.setCellValueFactory(new PropertyValueFactory<>("nombrePlaces"));
         placesCountColumn.setCellValueFactory(new PropertyValueFactory<>("placesDeclarees"));
 
-        // Charger les données dans la table
+        // Charger les données dans la TableView
         loadParkingData();
     }
 
+    /**
+     * Charge les données des parkings depuis la base de données.
+     */
     private void loadParkingData() {
         try (Connection connection = DatabaseHandler.getConnection()) {
+            // Récupération des données à l'aide du DAO
             ParkingDAO parkingDAO = new ParkingDAO(connection);
             List<Parking> parkings = parkingDAO.getAllParkingsWithPlacesCount();
+
+            // Mise à jour de la liste observable
             parkingList.setAll(parkings);
 
             // Mettre à jour la TableView
             placeTableView.setItems(parkingList);
 
-            // Mettre à jour le nombre total de parkings
+            // Afficher le nombre total de parkings dans le Label
             parkingCountField.setText(String.valueOf(parkingList.size()));
         } catch (Exception e) {
             e.printStackTrace();
@@ -75,9 +87,15 @@ public class ParkingListController {
         }
     }
 
+    /**
+     * Gère l'action de retour vers la page principale de l'admin.
+     *
+     * @param event Événement déclencheur.
+     */
     @FXML
     private void handleBackLinkAction(ActionEvent event) {
         try {
+            // Charger la vue principale de l'admin
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/insa/horodateurjava/views/admin/admin-home-view.fxml"));
             Parent root = loader.load();
 
@@ -94,6 +112,13 @@ public class ParkingListController {
         }
     }
 
+    /**
+     * Affiche une alerte à l'utilisateur.
+     *
+     * @param alertType Type d'alerte (WARNING, INFORMATION, ERROR).
+     * @param title     Titre de l'alerte.
+     * @param message   Contenu du message.
+     */
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
