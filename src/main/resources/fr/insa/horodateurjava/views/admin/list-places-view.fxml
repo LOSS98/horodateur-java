@@ -38,28 +38,40 @@
                         </DropShadow>
                     </effect>
                 </Rectangle>
-                <TableView fx:id="placeTableView" fixedCellSize="0.0" layoutX="70.0" layoutY="98.0" prefHeight="300.0" prefWidth="850.0" style="-fx-background-color: #81A4CD;">
+                <TableView fx:id="placeTableView" fixedCellSize="0.0" layoutX="70.0" layoutY="98.0" prefHeight="300.0" prefWidth="850.0" style="-fx-background-color: #FFF; -fx-padding: 10 10 10 10; -fx-background-radius: 20;">
                     <columns>
-                        <TableColumn id="parkingComboBox" fx:id="numeroColumn" prefWidth="121.42" style="-fx-background-color: #81A4CD; -fx-text-fill: #FFF;" text="Numéro de place" />
-                        <TableColumn fx:id="etageColumn" prefWidth="108.00001525878906" style="-fx-background-color: #81A4CD;" text="Etage" />
-                        <TableColumn fx:id="typeColumn" prefWidth="121.42" style="-fx-background-color: #81A4CD;" text="Type" />
-                        <TableColumn fx:id="disponibiliteColumn" prefWidth="121.42" style="-fx-background-color: #81A4CD;" text="Disponibilité" />
-                        <TableColumn fx:id="tarifHoraireColumn" prefWidth="121.42" style="-fx-background-color: #81A4CD;" text="Tarif Horraire" />
-                  <TableColumn fx:id="puissanceChargeColumn" prefWidth="151.20013427734375" style="-fx-background-color: #81A4CD;" text="Puissance de charge" />
-                  <TableColumn fx:id="enTravauxColumn" prefWidth="103.1998291015625" style="-fx-background-color: #81A4CD;" text="En traveaux" />
+                        <TableColumn id="parkingComboBox" fx:id="numeroColumn" prefWidth="121.42" style="-fx-background-color: #81A4CD; -fx-text-fill: #FFF; -fx-alignment: CENTER; -fx-font-size: 13;" text="Numéro de place" />
+                        <TableColumn fx:id="etageColumn" prefWidth="108.00001525878906" style="-fx-background-color: #81A4CD; -fx-text-fill: #FFF; -fx-alignment: CENTER; -fx-font-size: 13;" text="Etage" />
+                        <TableColumn fx:id="typeColumn" prefWidth="121.42" style="-fx-background-color: #81A4CD; -fx-text-fill: #FFF; -fx-alignment: CENTER; -fx-font-size: 13;" text="Type" />
+                        <TableColumn fx:id="disponibiliteColumn" prefWidth="121.42" style="-fx-background-color: #81A4CD; -fx-text-fill: #FFF; -fx-alignment: CENTER; -fx-font-size: 13;" text="Disponibilité" />
+                        <TableColumn fx:id="tarifHoraireColumn" prefWidth="111.54644775390625" style="-fx-background-color: #81A4CD; -fx-text-fill: #FFF; -fx-alignment: CENTER; -fx-font-size: 13;" text="Tarif Horaire" />
+                        <TableColumn fx:id="puissanceChargeColumn" prefWidth="158.45355224609375" style="-fx-background-color: #81A4CD; -fx-text-fill: #FFF; -fx-alignment: CENTER; -fx-font-size: 13;" text="Puissance de charge" />
+                        <TableColumn fx:id="enTravauxColumn" prefWidth="87.81378173828125" style="-fx-background-color: #81A4CD; -fx-text-fill: #FFF; -fx-alignment: CENTER; -fx-font-size: 13;" text="En travaux" />
                     </columns>
                 </TableView>
-            <ComboBox fx:id="parkingComboBox" layoutX="75.0" layoutY="47.0" prefWidth="150.0" promptText="Parking" style="-fx-background-radius: 50; -fx-background-color: #FFF; -fx-padding: 0 0  0 20; -fx-text-fill: #F17300;" />
-            <Button layoutX="239.0" layoutY="47.0" mnemonicParsing="false" onAction="#handleShowPlaces" style="-fx-background-color: #3e7cb1; -fx-border-radius: 50; -fx-background-radius: 50;" text="Afficher" textFill="WHITE" />
-            <Label fx:id="currentPlacesField" layoutX="843.0" layoutY="28.0" prefHeight="27.0" prefWidth="62.0" text="0" textFill="WHITE">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Label layoutX="843.0" layoutY="59.0" text="sur" textFill="WHITE" />
-            <Label fx:id="totalPlacesField" layoutX="864.0" layoutY="54.0" prefHeight="27.0" prefWidth="62.0" text="0" textFill="WHITE" />
-            <Label layoutX="843.0" layoutY="72.0" text="places de capacité" textFill="WHITE" />
-            <Label layoutX="843.0" layoutY="46.0" text="places déclarées" textFill="WHITE" />
+                <ComboBox fx:id="parkingComboBox" layoutX="75.0" layoutY="47.0" prefWidth="150.0" promptText="Parking" style="-fx-background-radius: 50; -fx-background-color: #FFF; -fx-padding: 0 0  0 20; -fx-text-fill: #F17300;" />
+                <Button layoutX="239.0" layoutY="47.0" mnemonicParsing="false" onAction="#handleShowPlaces" style="-fx-background-color: #3e7cb1; -fx-border-radius: 50; -fx-background-radius: 50;" text="Afficher" textFill="WHITE" />
+                <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#f17300" height="49.0" layoutX="635.0" layoutY="33.0" stroke="TRANSPARENT" strokeType="INSIDE" width="307.0">
+                    <effect>
+                        <DropShadow height="25.0" radius="12.0" width="25.0">
+                            <color>
+                                <Color opacity="0.0" />
+                            </color>
+                        </DropShadow>
+                    </effect>
+                </Rectangle>
+                <Label fx:id="currentPlacesField" layoutX="646.0" layoutY="43.0" prefHeight="27.0" prefWidth="62.0" text="0" textFill="WHITE">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Label layoutX="777.0" layoutY="48.0" text="sur" textFill="WHITE" />
+                <Label fx:id="totalPlacesField" layoutX="801.0" layoutY="43.0" prefHeight="27.0" prefWidth="62.0" text="0" textFill="WHITE">
+                    <font>
+                        <Font size="18.0" />
+                    </font></Label>
+                <Label layoutX="837.0" layoutY="48.0" text="places de capacité" textFill="WHITE" />
+                <Label layoutX="683.0" layoutY="48.0" text="places déclarées" textFill="WHITE" />
             </children>
         </AnchorPane>
     </center>
