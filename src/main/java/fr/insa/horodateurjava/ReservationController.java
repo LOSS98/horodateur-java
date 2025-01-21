@@ -21,29 +21,42 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Contrôleur de réservation qui gère la réservation de places dans le parking.
+ */
 public class ReservationController {
 
     @FXML
-    private TextField licensePlateField;
+    private TextField licensePlateField; // Champ pour entrer la plaque d'immatriculation
     @FXML
-    private DatePicker endDatePicker;
+    private DatePicker endDatePicker; // Sélecteur de date pour la fin de réservation
     @FXML
-    private TextField endHourField;
+    private TextField endHourField; // Champ pour l'heure de fin
     @FXML
-    private TextField endMinuteField;
+    private TextField endMinuteField; // Champ pour les minutes de fin
     @FXML
-    private TextField preferredFloorField;
+    private TextField preferredFloorField; // Champ pour spécifier l'étage préféré
     @FXML
-    private Label messageLabel;
+    private Label messageLabel; // Label pour afficher les messages d'erreur ou de confirmation
 
-    private String vehicleType;
-    private String parkingName;
+    private String vehicleType; // Type de véhicule sélectionné
+    private String parkingName; // Nom du parking sélectionné
 
+    /**
+     * Initialise les données de la réservation avec le type de véhicule et le nom du parking.
+     *
+     * @param vehicleType Type de véhicule sélectionné.
+     * @param parkingName Nom du parking sélectionné.
+     */
     public void initializeData(String vehicleType, String parkingName) {
         this.vehicleType = vehicleType;
         this.parkingName = parkingName;
     }
 
+    /**
+     * Action pour effectuer une réservation de place.
+     * Valide les champs, recherche une place disponible et confirme la réservation.
+     */
     @FXML
     private void onReservePlace() {
         try {
@@ -62,15 +75,11 @@ public class ReservationController {
                 return;
             }
 
-
-
             LocalDateTime endDateTime;
             LocalTime endTime;
 
+            // Formatage et validation de l'heure
             String timeString = endHourField.getText() + ":" + endMinuteField.getText() + ":00";
-
-
-
 
             try {
                 endTime = LocalTime.parse(timeString, DateTimeFormatter.ofPattern("HH:mm:ss"));
@@ -81,6 +90,7 @@ public class ReservationController {
 
             endDateTime = LocalDateTime.of(endDatePicker.getValue(), endTime);
 
+            // Vérifier si la date et l'heure de fin sont après la date actuelle
             if (endDateTime.isBefore(now)) {
                 messageLabel.setText("Erreur : la date et l'heure de fin doivent être ultérieures à maintenant.");
                 return;
@@ -89,25 +99,26 @@ public class ReservationController {
             try (Connection connection = DatabaseHandler.getConnection()) {
                 PlaceDAO placeDAO = new PlaceDAO(connection);
 
+                // Recherche de place disponible
                 Place availablePlace = placeDAO.findAvailablePlace(vehicleType, parkingName, preferredFloorStr);
                 if (availablePlace != null) {
                     Duration duration = Duration.between(now, endDateTime);
                     long totalHours = duration.toHours();
 
                     double totalPrice = totalHours * availablePlace.getTarifHoraire();
+
+                    // Création de la réservation
                     Reservation reservation = new Reservation(0, immatriculation, availablePlace.getNumero(), now, endDateTime, totalPrice);
                     placeDAO.reservePlace(availablePlace, reservation);
 
+                    // Charger la vue de confirmation
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fr/insa/horodateurjava/views/confirmation-view.fxml"));
-
                     BorderPane confirmationView = loader.load();
 
                     ConfirmationController confirmationController = loader.getController();
-
-
-
                     confirmationController.initialize(vehicleType, immatriculation, availablePlace.getNumero(), availablePlace.getEtage(), parkingName, now, endDateTime, totalPrice);
 
+                    // Mise à jour de la scène
                     Stage stage = (Stage) messageLabel.getScene().getWindow();
                     Scene scene = new Scene(confirmationView);
                     stage.setScene(scene);
@@ -125,11 +136,14 @@ public class ReservationController {
         }
     }
 
+    /**
+     * Action pour retourner à l'accueil.
+     *
+     * @param event Événement déclenché par le clic sur le lien de retour.
+     */
     @FXML
     private void handleBackLinkAction(ActionEvent event) {
-        // Récupérer la fenêtre actuelle et utiliser NavigationHelper
         Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
         NavigationHelper.handleBackLinkAction(currentStage);
     }
-
 }

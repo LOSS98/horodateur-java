@@ -10,11 +10,19 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * DAO (Data Access Object) pour gérer les entités "Place" dans la base de données.
+ */
 public class PlaceDAO {
 
     private static final Logger log = LoggerFactory.getLogger(PlaceDAO.class);
     private Connection connection;
 
+    /**
+     * Constructeur du DAO. Initialise une connexion et met à jour les disponibilités des places.
+     *
+     * @param connection La connexion à la base de données.
+     */
     public PlaceDAO(Connection connection) {
         this.connection = connection;
         String query = """
@@ -35,7 +43,11 @@ public class PlaceDAO {
         }
     }
 
-    // Créer la table Place
+    /**
+     * Crée la table "Place" si elle n'existe pas déjà.
+     *
+     * @throws SQLException En cas d'erreur SQL.
+     */
     public void createTable() throws SQLException {
         String createTableQuery = """
             CREATE TABLE IF NOT EXISTS Place (
@@ -52,6 +64,12 @@ public class PlaceDAO {
         }
     }
 
+    /**
+     * Ajoute une nouvelle place dans la base de données.
+     *
+     * @param place L'objet Place à ajouter.
+     * @throws SQLException En cas d'erreur SQL.
+     */
     public void addPlace(Place place) throws SQLException {
         String sql = "INSERT INTO Place (numero, etage, type, tarifHoraire, puissanceCharge, enTravaux, idParking, disponibilite) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, true)";
@@ -76,8 +94,12 @@ public class PlaceDAO {
         }
     }
 
-
-    // Lire toutes les places
+    /**
+     * Récupère toutes les places disponibles dans la base de données.
+     *
+     * @return Une liste d'objets Place.
+     * @throws SQLException En cas d'erreur SQL.
+     */
     public List<Place> getAllPlaces() throws SQLException {
         List<Place> places = new ArrayList<>();
         String query = "SELECT * FROM Place";
@@ -90,7 +112,13 @@ public class PlaceDAO {
         return places;
     }
 
-    // Mapper une place à partir du ResultSet
+    /**
+     * Mapper un résultat SQL vers un objet Place.
+     *
+     * @param resultSet Le résultat de la requête.
+     * @return Un objet Place correspondant aux données.
+     * @throws SQLException En cas d'erreur SQL.
+     */
     private Place mapPlace(ResultSet resultSet) throws SQLException {
         String type = resultSet.getString("type");
         Place place;
@@ -111,6 +139,7 @@ public class PlaceDAO {
             }
         }
 
+        // Créer une instance selon le type
         switch (type) {
             case "Classique" -> place = new PlaceClassique(numero, etage, tarifHoraire, enTravaux, parkingId);
             case "DeuxRoues" -> place = new PlaceDeuxRoues(numero, etage, tarifHoraire, enTravaux, parkingId);
@@ -125,43 +154,23 @@ public class PlaceDAO {
             default -> throw new IllegalArgumentException("Type inconnu : " + type);
         }
 
-        place.setNumero(resultSet.getInt("numero"));
-        place.setDisponibilite(resultSet.getBoolean("disponibilite"));
-        place.setEnTravaux(resultSet.getBoolean("enTravaux"));
-        place.setEtage(resultSet.getInt("etage"));
-        place.setTarifHoraire(resultSet.getDouble("tarifHoraire"));
-        place.setParking(resultSet.getInt("idParking"));
-        place.setType(resultSet.getString("type"));
-
         return place;
     }
 
+    /**
+     * Trouve une place disponible selon les critères fournis.
+     *
+     * @param vehicleType Le type de véhicule (Classique, DeuxRoues, etc.).
+     * @param parkingName Le nom du parking.
+     * @param florPlace   (Optionnel) Étage souhaité.
+     * @return Une instance Place si disponible, sinon null.
+     * @throws SQLException En cas d'erreur SQL.
+     */
     public Place findAvailablePlace(String vehicleType, String parkingName, String florPlace) throws SQLException {
-        String query;
-        if (florPlace == null) {
-            query = """
-        SELECT p.* 
-        FROM Place p
-        JOIN Parking pk ON p.idParking = pk.idParking
-        WHERE pk.nomDuParking = ? 
-          AND p.type = ? 
-          AND p.disponibilite = true 
-          AND p.enTravaux = false
-        LIMIT 1
-    """;
-        } else {
-            query = """
-        SELECT p.* 
-        FROM Place p
-        JOIN Parking pk ON p.idParking = pk.idParking
-        WHERE pk.nomDuParking = ? 
-          AND p.type = ? 
-          AND p.disponibilite = true 
-          AND p.enTravaux = false
-          AND p.etage = ?
-        LIMIT 1
-    """;
-        }
+        // Construction de la requête en fonction de l'étage
+        String query = florPlace == null ?
+                "SELECT p.* FROM Place p JOIN Parking pk ON p.idParking = pk.idParking WHERE pk.nomDuParking = ? AND p.type = ? AND p.disponibilite = true AND p.enTravaux = false LIMIT 1" :
+                "SELECT p.* FROM Place p JOIN Parking pk ON p.idParking = pk.idParking WHERE pk.nomDuParking = ? AND p.type = ? AND p.disponibilite = true AND p.enTravaux = false AND p.etage = ? LIMIT 1";
 
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, parkingName);
@@ -183,44 +192,36 @@ public class PlaceDAO {
         }
     }
 
+    /**
+     * Réserve une place et enregistre la réservation en base de données.
+     *
+     * @param place       La place à réserver.
+     * @param reservation Les détails de la réservation.
+     * @return true si la réservation a réussi, sinon false.
+     */
     public boolean reservePlace(Place place, Reservation reservation) {
-        // Requête pour mettre à jour la place comme étant réservée
         String updatePlaceQuery = "UPDATE Place SET disponibilite = false WHERE numero = ? AND idParking = ?";
-
-        // Requête pour insérer la réservation dans la table Reservation
-        String insertReservationQuery = """
-    INSERT INTO Reservation (immatriculation, numeroPlace, dateHeureDebut, dateHeureFin, idParking, prix)
-    VALUES (?, ?, ?, ?, ?, ?)
-    """;
+        String insertReservationQuery = "INSERT INTO Reservation (immatriculation, numeroPlace, dateHeureDebut, dateHeureFin, idParking, prix) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement updatePlaceStmt = connection.prepareStatement(updatePlaceQuery);
              PreparedStatement insertReservationStmt = connection.prepareStatement(insertReservationQuery)) {
 
-            // Marquer la place comme indisponible
-            updatePlaceStmt.setInt(1, place.getNumero()); // Numéro de la place
-            updatePlaceStmt.setInt(2, place.getIdParking()); // ID du parking
+            updatePlaceStmt.setInt(1, place.getNumero());
+            updatePlaceStmt.setInt(2, place.getIdParking());
             int rowsUpdated = updatePlaceStmt.executeUpdate();
 
             if (rowsUpdated == 0) {
-                // Aucune ligne mise à jour, la place est déjà réservée ou inexistante
                 System.out.println("La place est déjà réservée ou inexistante.");
                 return false;
             }
 
-            // Formatter pour le format "yyyy-MM-dd'T'HH:mm:ss"
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-
-            // Formater les dates avant de les insérer
-            String formattedStartDate = reservation.getDateHeureDebut().format(formatter);
-            String formattedEndDate = reservation.getDateHeureFin().format(formatter);
-
-            // Insérer la réservation dans la table Reservation
-            insertReservationStmt.setString(1, reservation.getImmatriculation()); // Immatriculation
-            insertReservationStmt.setInt(2, reservation.getNumeroPlace()); // Numéro de la place
-            insertReservationStmt.setString(3, formattedStartDate); // Date et heure de début formatées
-            insertReservationStmt.setString(4, formattedEndDate);   // Date et heure de fin formatées
-            insertReservationStmt.setInt(5, place.getIdParking()); // ID du parking (lié à la place)
-            insertReservationStmt.setDouble(6, reservation.getPrix()); // Prix
+            insertReservationStmt.setString(1, reservation.getImmatriculation());
+            insertReservationStmt.setInt(2, reservation.getNumeroPlace());
+            insertReservationStmt.setString(3, reservation.getDateHeureDebut().format(formatter));
+            insertReservationStmt.setString(4, reservation.getDateHeureFin().format(formatter));
+            insertReservationStmt.setInt(5, place.getIdParking());
+            insertReservationStmt.setDouble(6, reservation.getPrix());
             insertReservationStmt.executeUpdate();
 
             System.out.println("Réservation effectuée avec succès !");
@@ -232,6 +233,14 @@ public class PlaceDAO {
         }
     }
 
+    /**
+     * Vérifie si une place existe dans un parking donné.
+     *
+     * @param numero    Numéro de la place.
+     * @param idParking Identifiant du parking.
+     * @return true si la place existe, sinon false.
+     * @throws SQLException En cas d'erreur SQL.
+     */
     public boolean existsByNumeroAndIdParking(int numero, int idParking) throws SQLException {
         String query = "SELECT COUNT(*) FROM Place WHERE numero = ? AND idParking = ?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
@@ -239,14 +248,18 @@ public class PlaceDAO {
             statement.setInt(2, idParking);
 
             try (ResultSet resultSet = statement.executeQuery()) {
-                if (resultSet.next()) {
-                    return resultSet.getInt(1) > 0; // Retourne true si au moins une correspondance est trouvée
-                }
+                return resultSet.next() && resultSet.getInt(1) > 0;
             }
         }
-        return false; // Retourne false si aucune correspondance
     }
 
+    /**
+     * Supprime une place d'un parking spécifique.
+     *
+     * @param numero    Numéro de la place.
+     * @param idParking Identifiant du parking.
+     * @throws SQLException En cas d'erreur SQL.
+     */
     public void deletePlaceByNumeroAndIdParking(int numero, int idParking) throws SQLException {
         String query = "DELETE FROM Place WHERE numero = ? AND idParking = ?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
@@ -256,6 +269,18 @@ public class PlaceDAO {
         }
     }
 
+    /**
+     * Met à jour les informations d'une place dans un parking spécifique.
+     *
+     * @param parkingId       Identifiant du parking.
+     * @param numero          Numéro de la place.
+     * @param etage           (Optionnel) Nouvel étage.
+     * @param type            (Optionnel) Nouveau type.
+     * @param tarifHoraire    (Optionnel) Nouveau tarif horaire.
+     * @param puissanceCharge (Optionnel) Nouvelle puissance de charge.
+     * @param enTravaux       (Optionnel) Nouvel état de travaux.
+     * @throws SQLException En cas d'erreur SQL.
+     */
     public void updatePlace(int parkingId, int numero, Integer etage, String type, Double tarifHoraire, Double puissanceCharge, Boolean enTravaux) throws SQLException {
         StringBuilder query = new StringBuilder("UPDATE Place SET ");
         boolean firstField = true;
@@ -302,6 +327,13 @@ public class PlaceDAO {
         }
     }
 
+    /**
+     * Récupère toutes les places d'un parking spécifique.
+     *
+     * @param parkingId Identifiant du parking.
+     * @return Une liste d'objets Place.
+     * @throws SQLException En cas d'erreur SQL.
+     */
     public List<Place> getPlacesByParking(int parkingId) throws SQLException {
         String query = "SELECT * FROM Place WHERE idParking = ?";
         List<Place> places = new ArrayList<>();
@@ -353,12 +385,4 @@ public class PlaceDAO {
         }
         return places;
     }
-
-
-
-
-
-
-
-
 }

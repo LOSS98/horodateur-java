@@ -2,18 +2,30 @@ package fr.insa.horodateurjava.utils;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-import java.util.Objects;
-
+/**
+ * Classe utilitaire pour la gestion des mots de passe.
+ * Fournit des fonctionnalités pour hacher et vérifier les mots de passe.
+ */
 public class PasswordUtils {
 
-    // Hacher un mot de passe
+    /**
+     * Hache un mot de passe en utilisant l'algorithme BCrypt.
+     *
+     * @param plainPassword Le mot de passe en texte brut à hacher.
+     * @return Le mot de passe haché.
+     */
     public static String hashPassword(String plainPassword) {
         return BCrypt.hashpw(plainPassword, BCrypt.gensalt());
     }
 
-    // Vérifier un mot de passe
+    /**
+     * Vérifie si un mot de passe en texte brut correspond à un mot de passe haché.
+     *
+     * @param plainPassword  Le mot de passe en texte brut.
+     * @param hashedPassword Le mot de passe haché à vérifier.
+     * @return {@code true} si le mot de passe correspond, {@code false} sinon.
+     */
     public static boolean verifyPassword(String plainPassword, String hashedPassword) {
         return BCrypt.checkpw(plainPassword, hashedPassword);
-        //return Objects.equals(plainPassword, hashedPassword);
     }
 }

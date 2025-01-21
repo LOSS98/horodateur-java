@@ -1,58 +1,62 @@
-CREATE TABLE Place (
-                       numero INTEGER NOT NULL ,
-                       etage INTEGER NOT NULL,
-                       idParking INTEGER NOT NULL,
-                       type VARCHAR(50) NOT NULL,
-                       disponibilite BOOLEAN NOT NULL,
-                       tarifHoraire FLOAT NOT NULL,
-                       puissanceCharge FLOAT,
-                       enTravaux BOOLEAN NOT NULL
-                       PRIMARY KEY (idParking, numero)
-                       FOREIGN KEY (idParking) REFERENCES Parking(idParking)
+create table Administrateur
+(
+    idAdmin    INTEGER
+        primary key autoincrement,
+    nom        VARCHAR(100) not null,
+    prenom     VARCHAR(100) not null,
+    email      VARCHAR(255) not null
+        unique,
+    motDePasse VARCHAR(255) not null
 );
 
-CREATE TABLE Reservation (
-                             numeroReservation INTEGER PRIMARY KEY,
-                             immatriculation VARCHAR(50) NOT NULL,
-                             numeroPlace INTEGER NOT NULL,
-                             idParking INTEGER NOT NULL
-                             dateHeureDebut DATETIME NOT NULL,
-                             dateHeureFin DATETIME NOT NULL,
-                             FOREIGN KEY (numeroPlace) REFERENCES Place(numero),
-                             FOREIGN KEY (idParking) REFERENCES Place(idParking)
+create table Parking
+(
+    idParking        INTEGER
+        primary key autoincrement,
+    nomDuParking     VARCHAR(100) not null,
+    adresseDuParking VARCHAR(255) not null,
+    nombrePlaces     INTEGER      not null
 );
 
-CREATE TABLE Administrateur (
-                                idAdmin INTEGER PRIMARY KEY AUTOINCREMENT,
-                                nom VARCHAR(100) NOT NULL,
-                                prenom VARCHAR(100) NOT NULL,
-                                email VARCHAR(255) UNIQUE NOT NULL,
-                                motDePasse VARCHAR(255) NOT NULL
+create table Place
+(
+    numero          INTEGER,
+    etage           INTEGER     not null,
+    type            VARCHAR(50) not null,
+    disponibilite   BOOLEAN     not null,
+    tarifHoraire    FLOAT       not null,
+    puissanceCharge FLOAT,
+    enTravaux       BOOLEAN     not null,
+    idParking       integer
+        constraint Place_Parking
+            references Parking,
+    primary key (numero, idParking)
 );
 
-CREATE TABLE Rapport (
-                         idRapport INTEGER PRIMARY KEY AUTOINCREMENT,
-                         tauxOccupation FLOAT NOT NULL,
-                         heuresDePointe JSON,
-                         dateGeneration DATETIME NOT NULL,
-                         idAdmin INTEGER NOT NULL,
-                         FOREIGN KEY (idAdmin) REFERENCES Administrateur(idAdmin)
+create table Rapport
+(
+    idRapport      INTEGER
+        primary key autoincrement,
+    tauxOccupation FLOAT    not null,
+    dateGeneration DATETIME not null,
+    emailAdmin     String
+        references Administrateur (email),
+    totalRecettes  double,
+    dateTimeDebut  dateTime,
+    dateTimeFin    dateTime
 );
 
-CREATE TABLE Parking (
-                         idParking INTEGER PRIMARY KEY AUTOINCREMENT,
-                         nomDuParking VARCHAR(100) NOT NULL,
-                         adresseDuParking VARCHAR(255) NOT NULL,
-                         nombrePlaces INTEGER NOT NULL
+create table Reservation
+(
+    numeroReservation INTEGER
+        primary key,
+    immatriculation   VARCHAR(50) not null,
+    numeroPlace       INTEGER     not null
+        references Place (numero),
+    dateHeureDebut    DATETIME    not null,
+    dateHeureFin      DATETIME    not null,
+    idParking         integer     not null
+        references Place (idParking),
+    prix              double
 );
 
-CREATE TABLE HistoriqueReservation (
-                                       idHistorique INTEGER PRIMARY KEY AUTOINCREMENT,
-                                       numeroReservation INTEGER NOT NULL,
-                                       immatriculation VARCHAR(50) NOT NULL,
-                                       numeroPlace INTEGER NOT NULL,
-                                       dateHeureDebut DATETIME NOT NULL,
-                                       dateHeureFin DATETIME NOT NULL,
-                                       FOREIGN KEY (numeroReservation) REFERENCES RESERVATION(numeroReservation),
-                                       FOREIGN KEY (numeroPlace) REFERENCES PLACE(numero)
-);

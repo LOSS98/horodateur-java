@@ -1,6 +1,12 @@
 package fr.insa.horodateurjava.models;
 
+/**
+ * Classe abstraite représentant une place dans un parking.
+ * Cette classe sert de base pour différents types de places (classiques, handicapés, recharge électrique, etc.).
+ */
 public abstract class Place {
+
+    // Attributs communs à toutes les places
     private int numero;
     private int idParking;
     private String type;
@@ -9,6 +15,17 @@ public abstract class Place {
     private int etage;
     private double tarifHoraire;
 
+    /**
+     * Constructeur principal pour la classe Place.
+     *
+     * @param numero         Numéro de la place.
+     * @param etage          Étage où se trouve la place.
+     * @param type           Type de la place (classique, handicapé, etc.).
+     * @param disponibilite  Disponibilité de la place (true = disponible).
+     * @param tarifHoraire   Tarif horaire pour l'utilisation de la place.
+     * @param enTravaux      Indique si la place est en travaux (true = en travaux).
+     * @param idParking      Identifiant du parking auquel appartient la place.
+     */
     public Place(int numero, int etage, String type, boolean disponibilite, double tarifHoraire, boolean enTravaux, int idParking) {
         this.numero = numero;
         this.etage = etage;
@@ -19,11 +36,24 @@ public abstract class Place {
         this.idParking = idParking;
     }
 
-    public Place(int numero, int etage,  String type, boolean disponibilite, double tarifHoraire, double puissanceCharge, boolean enTravaux, int idParking) {
+    /**
+     * Surcharge du constructeur pour inclure des attributs spécifiques comme la puissance de charge.
+     *
+     * @param numero          Numéro de la place.
+     * @param etage           Étage où se trouve la place.
+     * @param type            Type de la place (classique, recharge électrique, etc.).
+     * @param disponibilite   Disponibilité de la place (true = disponible).
+     * @param tarifHoraire    Tarif horaire pour l'utilisation de la place.
+     * @param puissanceCharge Puissance de charge (utilisée pour les places électriques).
+     * @param enTravaux       Indique si la place est en travaux (true = en travaux).
+     * @param idParking       Identifiant du parking auquel appartient la place.
+     */
+    public Place(int numero, int etage, String type, boolean disponibilite, double tarifHoraire, double puissanceCharge, boolean enTravaux, int idParking) {
         this(numero, etage, type, disponibilite, tarifHoraire, enTravaux, idParking);
     }
 
-    // Getters et Setters communs
+    // Getters et Setters
+
     public int getNumero() {
         return numero;
     }
@@ -56,23 +86,21 @@ public abstract class Place {
         this.etage = etage;
     }
 
+    public int getIdParking() {
+        return idParking;
+    }
+
     public void setParking(int idParking) {
         this.idParking = idParking;
     }
 
-    public int getIdParking() {
-        return idParking;
+    public String getType() {
+        return type;
     }
 
     public void setType(String type) {
         this.type = type;
     }
-//
-//    public String getType() {
-//        return type;
-//    }
-
-
 
     public double getTarifHoraire() {
         return tarifHoraire;
@@ -80,10 +108,5 @@ public abstract class Place {
 
     public void setTarifHoraire(double tarifHoraire) {
         this.tarifHoraire = tarifHoraire;
-    }
-
-    // Méthode abstraite pour différencier les sous-classes
-    public String getType(){
-        return type;
     }
 }
