@@ -12,9 +12,9 @@ Il existe également un accès administrateur sur lequel on peut voir l’histor
 
 Pour une amélioration du projet, on pourrait accéder à l’administration via un compte administrateur mais la gestion des authentifications n’est pas notre priorité actuellement.
 
-## 4.2. Conception
+## Conception
 
-### 4.2.1. Utilisateur
+### 1. Utilisateur
 
 Pour implémenter notre application, nous avons choisi d'utiliser le logiciel SceneBuilder pour concevoir l'interface utilisateur, complétée par notre propre code Java. Une partie de l'interface de l'application est présentée ci-dessous. Elle intègre les fonctionnalités prévues ainsi que les optimisations de design élaborées à l'aide de Figma.
 
@@ -27,7 +27,7 @@ Sur cette page, le DateTimePicker que nous souhaitions utiliser pour enregistrer
 #### Récapitulatif de réservation
 Lorsque la place est réservée, l’utilisateur reçoit un message récapitulatif de sa demande ainsi que la place attribuée.
 
-### 4.2.2. Administrateurs
+### 2. Administrateurs
 
 #### Modification d’une place de parking
 
