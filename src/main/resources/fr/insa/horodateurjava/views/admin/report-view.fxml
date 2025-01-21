@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #DBE4EE;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.insa.horodateurjava.adminControllers.ReportController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #DBE4EE;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.insa.horodateurjava.adminControllers.ReportController">
     <top>
         <AnchorPane prefHeight="150.0" prefWidth="150.0" BorderPane.alignment="CENTER">
             <children>
@@ -48,8 +48,8 @@
                </rowConstraints>
                <children>
                   <Label prefHeight="17.0" prefWidth="197.0" style="-fx-padding: 0 0 0 57;" text="Heure de Début :" textAlignment="RIGHT" textFill="#054a91" />
-                  <TextField fx:id="hhdebutField" prefHeight="26.0" prefWidth="71.0" promptText="HH" style="-fx-background-color: #81A4CD; -fx-background-radius: 100; -fx-alignment: center;" GridPane.columnIndex="1" />
-                  <TextField fx:id="mmdebutField" prefHeight="26.0" prefWidth="122.0" promptText="MM" style="-fx-background-color: #81A4CD; -fx-background-radius: 100; -fx-alignment: center;" GridPane.columnIndex="3" />
+                  <TextField fx:id="hhdebutField" prefHeight="26.0" prefWidth="71.0" promptText="HH" style="-fx-background-color: #81A4CD; -fx-background-radius: 100; -fx-alignment: center; -fx-text-fill: #FFF;" GridPane.columnIndex="1" />
+                  <TextField fx:id="mmdebutField" prefHeight="26.0" prefWidth="122.0" promptText="MM" style="-fx-background-color: #81A4CD; -fx-background-radius: 100; -fx-alignment: center; -fx-text-fill: #FFF;" GridPane.columnIndex="3" />
                </children>
             </GridPane>
             <GridPane layoutX="215.0" layoutY="217.0" prefHeight="60.0" prefWidth="450.0">
@@ -91,8 +91,8 @@
                </rowConstraints>
                <children>
                   <Label prefHeight="17.0" prefWidth="197.0" style="-fx-padding: 0 0 0 57;" text="Heure de fin ::" textAlignment="RIGHT" textFill="#054a91" />
-                  <TextField fx:id="hhfinField" prefHeight="26.0" prefWidth="71.0" promptText="HH" style="-fx-background-color: #81A4CD; -fx-background-radius: 100; -fx-alignment: center;" GridPane.columnIndex="1" />
-                  <TextField fx:id="mmfinField" prefHeight="26.0" prefWidth="122.0" promptText="MM" style="-fx-background-color: #81A4CD; -fx-background-radius: 100; -fx-alignment: center;" GridPane.columnIndex="3" />
+                  <TextField fx:id="hhfinField" prefHeight="26.0" prefWidth="71.0" promptText="HH" style="-fx-background-color: #81A4CD; -fx-background-radius: 100; -fx-alignment: center; -fx-text-fill: #FFF;" GridPane.columnIndex="1" />
+                  <TextField fx:id="mmfinField" prefHeight="26.0" prefWidth="122.0" promptText="MM" style="-fx-background-color: #81A4CD; -fx-background-radius: 100; -fx-alignment: center; -fx-text-fill: #FFF;" GridPane.columnIndex="3" />
                </children>
             </GridPane>
             </children>

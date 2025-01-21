@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600" prefWidth="1000" style="-fx-background-color: DBE4EE;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.insa.horodateurjava.adminControllers.ParkingController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600" prefWidth="1000" style="-fx-background-color: DBE4EE;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.insa.horodateurjava.adminControllers.ParkingController">
     <top>
         <AnchorPane prefHeight="150" prefWidth="800" BorderPane.alignment="CENTER">
             <children>
@@ -33,12 +33,12 @@
     <center>
         <AnchorPane prefHeight="400" prefWidth="800" BorderPane.alignment="CENTER">
             <children>
-                <Text fill="#054a91" layoutX="391.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0" text="Nom du parking :">
+                <Text fill="#054a91" layoutX="392.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0" text="Nom du parking :">
                     <font>
                         <Font size="14" />
                     </font>
                 </Text>
-                <TextField fx:id="nameField" layoutX="528" layoutY="92" prefWidth="200" style="-fx-background-color: #81A4CD; -fx-text-fill: WHITE; -fx-font-size: 14px;" />
+                <TextField fx:id="nameField" layoutX="528.0" layoutY="100.0" prefWidth="200" style="-fx-background-color: #81A4CD; -fx-text-fill: WHITE; -fx-font-size: 14px;" />
 
                 <Text fill="#054a91" layoutX="374.0" layoutY="169.0" strokeType="OUTSIDE" strokeWidth="0" text="Adresse du parking :">
                     <font>
@@ -46,16 +46,16 @@
                     </font>
                 </Text>
 
-                <Text fill="#054a91" layoutX="362.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0" text="Places disponibles :" textAlignment="RIGHT" wrappingWidth="138.1826171875">
+                <Text fill="#054a91" layoutX="353.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0" text="Places disponibles :" textAlignment="RIGHT" wrappingWidth="138.1826171875">
                     <font>
                         <Font size="14" />
                     </font>
                 </Text>
                 <HBox layoutX="528" layoutY="202" spacing="10">
-                    <TextField fx:id="placesField" prefWidth="50" style="-fx-background-color: #81A4CD; -fx-text-fill: WHITE; -fx-font-size: 14px;" />
+                    <TextField fx:id="placesField" prefHeight="27.0" prefWidth="199.0" style="-fx-background-color: #81A4CD; -fx-text-fill: WHITE; -fx-font-size: 14px;" />
                 </HBox>
 
-                <Button layoutX="721.0" layoutY="283.0" mnemonicParsing="false" onAction="#handleAddParking" prefHeight="30" prefWidth="100" style="-fx-background-color: #054A91;" text="Ajouter" textFill="WHITE">
+                <Button layoutX="654.0" layoutY="283.0" mnemonicParsing="false" onAction="#handleAddParking" prefHeight="30" prefWidth="100" style="-fx-background-color: #054A91;" text="Ajouter" textFill="WHITE">
                     <font>
                         <Font size="14" />
                     </font>
@@ -63,12 +63,12 @@
 
                 <Label fx:id="messageLabel" layoutX="375" layoutY="400" style="-fx-text-fill: red;" text="" />
             <TextField fx:id="addressField" layoutX="528.0" layoutY="149.0" prefWidth="200" style="-fx-background-color: #81A4CD; -fx-text-fill: WHITE; -fx-font-size: 14px;" />
-            <Button layoutX="606.0" layoutY="283.0" mnemonicParsing="false" onAction="#handleUpdateParking" prefHeight="30" prefWidth="100" style="-fx-background-color: #054A91;" text="Modifier" textFill="WHITE">
+            <Button layoutX="504.0" layoutY="283.0" mnemonicParsing="false" onAction="#handleUpdateParking" prefHeight="30" prefWidth="100" style="-fx-background-color: #054A91;" text="Modifier" textFill="WHITE">
                <font>
                   <Font size="14" />
                </font>
             </Button>
-            <Button layoutX="302.0" layoutY="283.0" mnemonicParsing="false" onAction="#handleDeleteParking" prefHeight="30" prefWidth="100" style="-fx-background-color: #054A91;" text="Supprimer" textFill="WHITE">
+            <Button layoutX="351.0" layoutY="283.0" mnemonicParsing="false" onAction="#handleDeleteParking" prefHeight="30" prefWidth="100" style="-fx-background-color: #054A91;" text="Supprimer" textFill="WHITE">
                <font>
                   <Font size="14" />
                </font>
@@ -78,7 +78,7 @@
                   <Font size="14" />
                </font>
             </Text>
-            <TextField fx:id="idField" layoutX="527.0" layoutY="45.0" prefHeight="30.0" prefWidth="54.0" style="-fx-background-color: #81A4CD; -fx-text-fill: WHITE; -fx-font-size: 14px;" />
+            <TextField fx:id="idField" layoutX="527.0" layoutY="48.0" prefHeight="27.0" prefWidth="202.0" style="-fx-background-color: #81A4CD; -fx-text-fill: WHITE; -fx-font-size: 14px;" />
             </children>
         </AnchorPane>
     </center>

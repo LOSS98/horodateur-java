@@ -43,7 +43,7 @@
             <TableView fixedCellSize="0.0" layoutX="75.0" layoutY="100.0" prefHeight="300.0" prefWidth="850.0" style="-fx-background-color: #81A4CD;">
                <columns>
                   <TableColumn prefWidth="170.0" style="-fx-background-color: #81A4CD; -fx-text-fill: #FFFFFF;" text="Numero Place" />
-                  <TableColumn prefWidth="170.0" style="-fx-background-color: #81A4CD;" text="Etage" />
+                  <TableColumn prefWidth="170.0" style="-fx-background-color: #81A4CD; -fx-text-fill: #FFFFFF;" text="Etage" />
                   <TableColumn prefWidth="170.0" style="-fx-background-color: #81A4CD;" text="Disponibilité" />
                   <TableColumn prefWidth="170.0" style="-fx-background-color: #81A4CD;" text=" Type de place" />
                   <TableColumn prefWidth="170.0" style="-fx-background-color: #81A4CD;" text="En Travaux" />

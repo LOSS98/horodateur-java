@@ -13,9 +13,9 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #DBE4EE;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #DBE4EE;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
     <top>
-        <AnchorPane prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #3;" BorderPane.alignment="CENTER">
+        <AnchorPane prefHeight="150.0" prefWidth="150.0" BorderPane.alignment="CENTER">
             <children>
                 <Rectangle arcWidth="5.0" cache="true" cacheHint="ROTATE" fill="#3e7cb1" height="75.0" layoutY="75.0" stroke="TRANSPARENT" strokeType="INSIDE" width="1000.0" />
                 <Label layoutX="394.0" layoutY="101.0" style="-fx-text-fill: #FFFFFF;" text="Ajouter une place de parking" textFill="WHITE">

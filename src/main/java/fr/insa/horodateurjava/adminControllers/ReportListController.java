@@ -57,7 +57,7 @@ public class ReportListController {
         recettesColumn.setCellValueFactory(new PropertyValueFactory<>("totalRecettes"));
         startColumn.setCellValueFactory(new PropertyValueFactory<>("dateDebut"));
         endColumn.setCellValueFactory(new PropertyValueFactory<>("dateFin"));
-        generatedByColumn.setCellValueFactory(new PropertyValueFactory<>("adminName"));
+        generatedByColumn.setCellValueFactory(new PropertyValueFactory<>("emailAdmin"));
 
         loadReports();
     }

@@ -13,7 +13,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #DBE4EE;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.insa.horodateurjava.adminControllers.AdminListController">
     <top>
-        <AnchorPane prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #3;" BorderPane.alignment="CENTER">
+        <AnchorPane prefHeight="150.0" prefWidth="150.0" BorderPane.alignment="CENTER">
             <children>
                 <Rectangle arcWidth="5.0" cache="true" cacheHint="ROTATE" fill="#3e7cb1" height="75.0" layoutY="75.0" stroke="TRANSPARENT" strokeType="INSIDE" width="1000.0" />
                 <Label layoutX="426.0" layoutY="99.0" text="Liste des administrateurs" textFill="WHITE">
@@ -37,20 +37,29 @@
                         </DropShadow>
                     </effect>
                 </Rectangle>
-                <TableView fx:id="placeTableView" fixedCellSize="0.0" layoutX="70.0" layoutY="98.0" prefHeight="300.0" prefWidth="850.0" style="-fx-background-color: #81A4CD;">
+                <TableView fx:id="placeTableView" fixedCellSize="0.0" layoutX="70.0" layoutY="98.0" prefHeight="300.0" prefWidth="850.0" style="-fx-background-color: #FFF; -fx-background-radius: 20; -fx-border-radius: 20; -fx-padding: 10 10 10 10;">
                     <columns>
-                        <TableColumn id="parkingComboBox" fx:id="idColumn" prefWidth="79.20001220703125" style="-fx-background-color: #81A4CD; -fx-text-fill: #FFF;" text="ID" />
-                        <TableColumn fx:id="nomColumn" prefWidth="199.99998474121094" style="-fx-background-color: #81A4CD;" text="Nom" />
-                        <TableColumn fx:id="prenomColumn" prefWidth="196.0" style="-fx-background-color: #81A4CD;" text="Prénom" />
-                        <TableColumn fx:id="emailColumn" minWidth="0.0" prefWidth="373.6000122070312" style="-fx-background-color: #81A4CD;" text="Email" />
+                        <TableColumn id="parkingComboBox" fx:id="idColumn" prefWidth="79.20001220703125" style="-fx-background-color: #81A4CD; -fx-text-fill: #FFF; -fx-alignment: center; -fx-font-size: 13;" text="ID" />
+                        <TableColumn fx:id="nomColumn" prefWidth="199.99998474121094" style="-fx-background-color: #81A4CD; -fx-text-fill: #FFF; -fx-alignment: CENTER; -fx-font-size: 13;" text="Nom" />
+                        <TableColumn fx:id="prenomColumn" prefWidth="196.0" style="-fx-background-color: #81A4CD; -fx-text-fill: #FFF; -fx-alignment: CENTER; -fx-font-size: 13;" text="Prénom" />
+                        <TableColumn fx:id="emailColumn" minWidth="0.0" prefWidth="373.6000122070312" style="-fx-background-color: #81A4CD; -fx-text-fill: #FFF; -fx-alignment: CENTER; -fx-font-size: 13;" text="Email" />
                     </columns>
                 </TableView>
-            <Label fx:id="adminCountField" layoutX="843.0" layoutY="28.0" prefHeight="27.0" prefWidth="62.0" text="0" textFill="WHITE">
+            <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#f17300" height="49.0" layoutX="794.0" layoutY="31.0" stroke="TRANSPARENT" strokeType="INSIDE" width="146.0">
+               <effect>
+                  <DropShadow height="25.0" radius="12.0" width="25.0">
+                     <color>
+                        <Color opacity="0.0" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </Rectangle>
+            <Label fx:id="adminCountField" layoutX="808.0" layoutY="42.0" prefHeight="27.0" prefWidth="62.0" text="0" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label layoutX="843.0" layoutY="51.0" text="Administrateurs" textFill="WHITE" />
+            <Label layoutX="839.0" layoutY="48.0" text="Administrateurs" textFill="WHITE" />
             </children>
         </AnchorPane>
     </center>

@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #DBE4EE;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.insa.horodateurjava.adminControllers.AdminHomeController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #DBE4EE;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.insa.horodateurjava.adminControllers.AdminHomeController">
    <top>
       <AnchorPane prefHeight="150.0" prefWidth="150.0" BorderPane.alignment="CENTER">
          <children>
@@ -17,8 +17,8 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button cache="true" cacheHint="SPEED" onAction="#onGenerateReport" layoutX="25.0" layoutY="20.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #F17300;" text="Générer un rapport" textFill="WHITE" />
-            <Button cache="true" cacheHint="SPEED" onAction="#onViewHistory" layoutX="200.0" layoutY="20.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #F17300;" text="Consulter l'historique" textFill="WHITE" />
+            <Button cache="true" cacheHint="SPEED" layoutX="25.0" layoutY="20.0" mnemonicParsing="false" onAction="#onGenerateReport" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #F17300;" text="Générer un rapport" textFill="WHITE" />
+            <Button cache="true" cacheHint="SPEED" layoutX="200.0" layoutY="20.0" mnemonicParsing="false" onAction="#onViewHistory" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #F17300;" text="Consulter l'historique" textFill="WHITE" />
             <Button cache="true" cacheHint="SPEED" layoutX="875.0" layoutY="20.0" mnemonicParsing="false" onAction="#onLogout" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #F17300;" text="Déconnexion" textFill="WHITE" />
          </children>
       </AnchorPane>
